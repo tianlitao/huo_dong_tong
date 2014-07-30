@@ -1,0 +1,58 @@
+<div class="single-form-container">
+  <%= form_for @user do |f| %>
+      <div class="boxed-group">
+        <h3>新用户注册</h3>
+        <li><%= link_to "用户登录", login_path %></li>
+        <div class="boxed-group-inner">
+          <% if @user.errors.any? %>
+              <div class="form_errorred">
+                填写的信息有误
+              </div>
+          <% end %>
+
+          <div class="input-group input-group-lg">
+            <%= f.label :帐号, :class => "input-group-addon" %>
+            <%= f.text_field :name, :class => "form-control" %>
+
+          <% if @user.errors[:name].any? %>
+              <dd class="error"><%= @user.errors[:name][0] %></dd>
+          <% end %>
+          </div>
+          <p></p>
+          <div class="input-group input-group-lg">
+             <%= f.label :请设置密码, :class => "input-group-addon" %>
+             <%= f.password_field :password,:class => "form-control" %>
+            <% if @user.errors[:password].any? %>
+                <dd class="error"><%= @user.errors[:password][0] %></dd>
+            <% end %>
+          </div>
+          <p></p>
+          <div class="input-group input-group-lg">
+            <%= f.label :请确认重复密码, :class => "input-group-addon" %>
+          <%= f.password_field :password_confirmation,:class => "form-control" %>
+            <% if @user.errors[:password_confirmation].any? %>
+                <dd class="error"><%= @user.errors[:password_confirmation][0] %></dd>
+            <% end %>
+          </div>
+          <p></p>
+          <div class="input-group input-group-lg">
+             <%= f.label :忘记密码问题, :class => "input-group-addon" %>
+             <%= f.text_field :question,:class => "form-control" %>
+            <% if @user.errors[:question].any? %>
+                <dd class="error"><%= @user.errors[:question][0] %></dd>
+            <% end %>
+            </div>
+          <p></p>
+          <div class="input-group input-group-lg">
+               <%= f.label :忘记密码答案, :class => "input-group-addon" %>
+               <%= f.text_field :answer,:class => "form-control" %>
+              <% if @user.errors[:answer].any? %>
+                  <dd class="error"><%= @user.errors[:answer][0] %></dd>
+              <% end %>
+            </div>
+
+          <p><%= f.submit "注册", :class => "button primary" %></p>
+        </div>
+      </div>
+  <% end %>
+</div>
