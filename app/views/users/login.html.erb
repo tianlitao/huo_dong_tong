@@ -6,12 +6,12 @@
       <%= form_tag "/create_login_session" do %>
           <div class="input-group" >
             <span class="input-group-addon" >帐号</span>
-            <%= text_field_tag :name, params[:name], :class => 'form-control', :placeholder => "Username" %>
+            <%= text_field_tag :name, params[:name], :class => 'form-control', :placeholder => "请输入帐号" %>
           </div>
           <p></p>
           <div class="input-group">
             <span class="input-group-addon">密码</span>
-            <%= password_field_tag :password, params[:password], :class => 'form-control', :placeholder => "password" %>
+            <%= password_field_tag :password, params[:password], :class => 'form-control', :placeholder => "请输入密码" %>
           </div>
           <p></p>
           <p><%= link_to "忘记密码", login_path,:style => "padding-left: 400px" %></p>
