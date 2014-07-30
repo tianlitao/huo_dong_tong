@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
   def logout
     cookies.delete(:token)
-    redirect_to root_url, :notice=> "已经退出登录"
+    redirect_to :login, :notice=> "已经退出登录"
   end
   def create_login_session
     user =User.find_by_name(params[:name])

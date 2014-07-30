@@ -4,51 +4,36 @@
       <%= form_for @user do |f| %>
           <h3>新用户注册</h3>
           <p><%= link_to "用户登录", login_path, :style => "padding-left: 400px" %></p>
-          <% if @user.errors.any? %>
-              <div class="form_errorred">
-                填写的信息有误
-              </div>
-          <% end %>
           <div class="input-group">
             <%= f.label :帐号, :class => "input-group-addon", :style => "padding-left: 50px;padding-right: 50px" %>
             <%= f.text_field :name, :class => "form-control" %>
           </div>
-          <% if @user.errors[:name].any? %>
-              <dd class="error"><%= @user.errors[:name][0] %></dd>
-          <% end %>
           <p></p>
           <div class="input-group">
             <%= f.label :请设置密码, :class => "input-group-addon", :style => "padding-left: 30px;padding-right: 30px" %>
             <%= f.password_field :password, :class => "form-control" %>
           </div>
-          <% if @user.errors[:password].any? %>
-              <dd class="error"><%= @user.errors[:password][0] %></dd>
-          <% end %>
           <p></p>
           <div class="input-group">
             <%= f.label :请确认重复密码, :class => "input-group-addon", :style => "padding-left: 16px;padding-right: 16px" %>
             <%= f.password_field :password_confirmation, :class => "form-control" %>
           </div>
-          <% if @user.errors[:password_confirmation].any? %>
-              <dd class="error"><%= @user.errors[:password_confirmation][0] %></dd>
-          <% end %>
           <p></p>
           <div class="input-group ">
             <%= f.label :忘记密码问题, :class => "input-group-addon", :style => "padding-left: 22px;padding-right: 22px" %>
             <%= f.text_field :question, :class => "form-control" %>
           </div>
-          <% if @user.errors[:question].any? %>
-              <dd class="error"><%= @user.errors[:question][0] %></dd>
-          <% end %>
           <p></p>
           <div class="input-group ">
             <%= f.label :忘记密码答案, :class => "input-group-addon", :style => "padding-left: 22px;padding-right: 22px" %>
             <%= f.text_field :answer, :class => "form-control" %>
           </div>
-          <% if @user.errors[:answer].any? %>
-              <dd class="error"><%= @user.errors[:answer][0] %></dd>
-          <% end %>
           <p></p>
+          <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <%= @user.errors.full_messages.first %>
+                </div>
+          <% end %>
           <p><%= f.submit "注册", :class => "button primary", :style => "margin-left: 165px;width: 116px" %></p>
           </div>
           </div>

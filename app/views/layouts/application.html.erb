@@ -8,7 +8,10 @@
 </head>
 <body>
 <h1>&nbsp;活动通</h1>
-
+<% if current_user %>
+<%= render 'shared/header' %>
+<% else %>
+<% end %>
 <%= yield %>
 
 </body>
