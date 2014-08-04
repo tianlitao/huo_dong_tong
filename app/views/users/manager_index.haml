@@ -10,10 +10,11 @@
       %td(align="center")  编号
       %td(align="center")  用户名
       %td(align="center")   操作
+    -  id=0
     - @user.each do |p|
       - if p.name!="admin"
         %tr
-          %td(align="center")= ++i
+          %td(align="center")= id=id+1
           %td(align="center")= p.name
           %td(align="center")
             =link_to "删除",delete_user_path(:name=>p[:name]), data: { confirm: '您确定要删除'+p[:name]+'？'}, :method => :delete
