@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-   get 'users/backstage'
+  get 'users/backstage'
 
   root to: "users#login"
   get "/signup" => "users#signup", :as => "signup"
-  get "/login" =>"users#login", :as=>"login"
-  get "/welcome" => "users#welcome", :as=>"welcome"
-  get "/add_user" => "users#add_user", :as=>"add_user"
+  get "/login" => "users#login", :as => "login"
+  get "/welcome" => "users#welcome", :as => "welcome"
+  get "/add_user" => "users#add_user", :as => "add_user"
   get "/manager_index" => "users#manager_index", :as => "manager_index"
   post "/create_login_session" => "users#create_login_session"
-  delete "logout" => "users#logout", :as =>"logout"
-  resources :users,only: [:create]
+  delete "delete_user" => "users#delete_user", :as => "delete_user"
+  delete "logout" => "users#logout", :as => "logout"
+  resources :users, only: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

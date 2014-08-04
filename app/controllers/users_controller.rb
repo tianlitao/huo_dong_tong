@@ -6,17 +6,20 @@ class UsersController < ApplicationController
   def manager_index
     @user=User.paginate(page: params[:page],per_page:11)
   end
-
   def welcome
   end
-
   def login
   end
-
   def signup
     @user=User.new
   end
-
+  def delete_user
+    User.get_activity(params[:name]).delete
+    redirect_to :manager_index
+  end
+  # def get_activity(name)
+  #   User.find_by_name(name)
+  # end
   def logout
     cookies.delete(:token)
     redirect_to :login
