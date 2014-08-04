@@ -1,0 +1,21 @@
+#login.boxed-group
+  .panel.panel-default{:style => "width: 500px;margin-left: 450px;;margin-top: 90px"}
+    .panel-body
+      %h3 用户登录
+      %p= link_to "用户注册", signup_path, :style => "padding-left: 400px"
+      = form_tag "/create_login_session" do
+        .input-group
+          %span.input-group-addon 帐号
+          = text_field_tag :name, params[:name], :class => 'form-control', :placeholder => "请输入帐号"
+        %p
+        .input-group
+          %span.input-group-addon 密码
+          = password_field_tag :password, params[:password], :class => 'form-control', :placeholder => "请输入密码"
+        %p
+        %p= link_to "忘记密码", login_path,:style => "padding-left: 400px"
+        %p
+          - if flash[:error]
+            .alert.alert-danger
+              =flash[:error]
+        %p
+          = submit_tag "登录", :style => "margin-left: 165px;width: 116px"

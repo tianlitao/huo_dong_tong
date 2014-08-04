@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :question
       t.string :answer
       t.string :token
-
       t.timestamps
     end
   end

@@ -1,5 +1,12 @@
 #encoding:utf-8
 class UsersController < ApplicationController
+  def add_user
+    @user=User.new
+  end
+  def manager_index
+    @user=User.paginate(page: params[:page],per_page:11)
+  end
+
   def welcome
   end
 
@@ -9,28 +16,32 @@ class UsersController < ApplicationController
   def signup
     @user=User.new
   end
+
   def logout
     cookies.delete(:token)
-    redirect_to :login, :notice=> "已经退出登录"
+    redirect_to :login
   end
   def create_login_session
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token]=user.token
-      redirect_to :welcome, :notice =>  "登录成功"
+      if user.name == "admin"
+        redirect_to :manager_index
+      else
+        redirect_to :welcome
+      end
     else
       flash[:error]="无效的用户名或密码"
       redirect_to :login
     end
   end
+
   def create
     @user=User.new(params[:user])
     if @user.save
-      cookies.permanent[:token]=@user.token
-      redirect_to :root, :notice => "注册成功"
+      redirect_to :root
     else
       render :signup
     end
   end
 end
-

@@ -19,7 +19,15 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-
+production:
+  adapter: sqlite3
+  encoding: utf8
+  reconnect: false
+  database: users
+  pool: 5
+  username: root
+  password: 901110
+  SECRET_KEY_BASE: e666fd082bfa95dff96edb5fe3ea7b0800172b978dc1182bc99842439d16f50b4c2f409531da93d4f09efc5c6464429484c854ff052b8c6ab2ccc4e6868af73f
 production:
   <<: *default
   database: db/production.sqlite3

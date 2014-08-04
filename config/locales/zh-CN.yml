@@ -12,19 +12,19 @@ zh-CN:
        user:
         attributes:
           question:
-           blank: "不能为空"
+           blank: "请将注册信息填写完整"
           answer:
-           blank: "不能为空"
+           blank: "请将注册信息填写完整"
           name:
-            blank: "不能为空"
+            blank: "请将注册信息填写完整"
             taken: "已占用"
           password:
-            blank: "不能为空"
+            blank: "请将注册信息填写完整"
             too_short: "最短%{count}个字符"
           password_confirmation:
-            blank: "不能为空"
+            blank: "请将注册信息填写完整"
             confirmation: "密码不匹配"
           question:
-            blank: "不能为空"
+            blank: "请将注册信息填写完整"
           answer:
-            blank: "不能为空"
+            blank: "请将注册信息填写完整"
