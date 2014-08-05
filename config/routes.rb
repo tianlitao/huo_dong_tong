@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'users/backstage'
 
   root to: "users#login"
+  get "/modify_password" => "users#modify_password", :as => "modify_password"
   get "/signup" => "users#signup", :as => "signup"
   get "/login" => "users#login", :as => "login"
   get "/welcome" => "users#welcome", :as => "welcome"

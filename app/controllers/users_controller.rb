@@ -5,6 +5,12 @@ class UsersController < ApplicationController
   end
   def manager_index
     @user=User.paginate(page: params[:page],per_page:11)
+    if params[:page].to_i==0
+      @us=1
+    else
+      @us=params[:page].to_i
+    end
+
   end
   def welcome
   end
@@ -12,6 +18,9 @@ class UsersController < ApplicationController
   end
   def signup
     @user=User.new
+  end
+  def modify_password
+    @user=User.new(params[:name])
   end
   def delete_user
     User.get_activity(params[:name]).delete

@@ -1,16 +1,13 @@
 .panel.panel-default
-
   .panel-heading
     用户管理&nbsp&nbsp&nbsp
     %button= link_to "+添加用户",add_user_path
-
-
   %table.table
     %tr
       %td(align="center")  编号
       %td(align="center")  用户名
       %td(align="center")   操作
-    -  id=0
+    -  id=(@us-1)*10
     - @user.each do |p|
       - if p.name!="admin"
         %tr
@@ -18,6 +15,6 @@
           %td(align="center")= p.name
           %td(align="center")
             =link_to "删除",delete_user_path(:name=>p[:name]), data: { confirm: '您确定要删除'+p[:name]+'？'}, :method => :delete
-            =link_to " 修改密码"
-  .right-padding(align="right")
-    = will_paginate @user, :previous_label=> '<<', :next_label=> '>>'
+            =link_to " 修改密码",modify_password_path(:name=>p[:name])
+.right-padding(align="right")
+  = will_paginate @user, :previous_label=> '<<', :next_label=> '>>'
