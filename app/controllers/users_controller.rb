@@ -3,8 +3,9 @@ class UsersController < ApplicationController
   def add_user
     @user=User.new
   end
+
   def manager_index
-    @user=User.paginate(page: params[:page],per_page:11)
+    @user=User.paginate(page: params[:page], per_page: 11)
     if params[:page].to_i==0
       @us=1
     else
@@ -12,20 +13,32 @@ class UsersController < ApplicationController
     end
 
   end
+
   def welcome
   end
+
   def login
   end
+
   def signup
     @user=User.new
   end
-  def modify_password
-    @user=User.new(params[:name])
+
+  def change_password
+    @user = User.get_activity(params[:name])
+    # @user.password = params[:name]
+    # @user.password_confirmation = params[:user][:password_confirmation]
   end
+
+  def modify_password
+    @user = User.get_activity(params[:name])
+  end
+
   def delete_user
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
+
   # def get_activity(name)
   #   User.find_by_name(name)
   # end
@@ -33,6 +46,7 @@ class UsersController < ApplicationController
     cookies.delete(:token)
     redirect_to :login
   end
+
   def create_login_session
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
@@ -51,9 +65,23 @@ class UsersController < ApplicationController
   def create
     @user=User.new(params[:user])
     if @user.save
-      redirect_to :root
+      if current_user
+        if current_user.name == "admin"
+          # cookies.permanent[:token]= @user.token
+          redirect_to :add_user
+        end
+      else
+        cookies.permanent[:token]= @user.token
+        render :welcome
+      end
     else
-      render :signup
+      if current_user
+        if current_user.name == "admin"
+          render :add_user
+        end
+      else
+        render :signup
+      end
     end
   end
 end

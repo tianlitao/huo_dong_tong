@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/welcome" => "users#welcome", :as => "welcome"
   get "/add_user" => "users#add_user", :as => "add_user"
   get "/manager_index" => "users#manager_index", :as => "manager_index"
+  post "/modify_password" => "users#change_password"
+  #post "/add_user" =>"users#add_user"
   post "/create_login_session" => "users#create_login_session"
   delete "delete_user" => "users#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"
