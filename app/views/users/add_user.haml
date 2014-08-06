@@ -1,7 +1,8 @@
 %ol.breadcrumb
   %li
-    %a{:href => "/login"} 首页
-  %li.active 添加用户
+    = link_to_unless_current "首页",manager_index_path
+  %li
+    = link_to_unless_current "添加用户", add_user_path
 .boxed-group
   .panel.panel-default{:style => "width: 500px;margin-left: 450px;;margin-top: 90px"}
     .panel-body
