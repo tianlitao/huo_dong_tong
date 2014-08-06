@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   end
 
   def manager_index
-    @user=User.paginate(page: params[:page], per_page: 11)
+    @user=User.paginate(page: params[:page], per_page: 10).offset(1)
+   User.all[0]={:id=>0,:name=>"admin",:password_digest=>"admin" }
     if params[:page].to_i==0
       @us=1
     else
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token]=user.token
-      if user.name == "admin"
+      if user.admin == true
         redirect_to :manager_index
       else
         redirect_to :welcome
@@ -67,7 +68,6 @@ class UsersController < ApplicationController
     if @user.save
       if current_user
         if current_user.name == "admin"
-          # cookies.permanent[:token]= @user.token
           redirect_to :add_user
         end
       else
