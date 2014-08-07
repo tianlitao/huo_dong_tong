@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :password, :password_confirmation, :question, :answer,:admin, :token
   before_create { generate_token(:token) }
-
 validates :name, :presence => true,:uniqueness => {:case_sensitive => false}
   validates :password,:presence => true, :on => :create
   has_secure_password

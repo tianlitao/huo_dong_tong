@@ -1,13 +1,16 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   User.all[0]={:id => 0, :name => "admin", :password_digest => "admin"}
+
   def add_user
     @user=User.new
   end
+
   def manager_index
-    session[:name].clear
+    session[:name]=""
     if  current_user
-      @user=User.paginate(page: params[:page], per_page: 10).offset(1)
+      user=User.where(:admin => "f")
+      @user=user.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
       else
@@ -17,8 +20,10 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+
   def welcome
   end
+
   def login
   end
 
@@ -28,37 +33,35 @@ class UsersController < ApplicationController
 
   def change_password
     user = User.get_activity(session[:name])
-
-
     # @user.password_digest=params[:user][:password_digest]
     user.password = params[:user][:password]
     user.password_confirmation = params[:user][:password_confirmation]
     if user.password==user.password_confirmation
       user.save
-   #   flash[:succeed] = '成功'
-      redirect_to :manager_index
+      @a=1
+      render :modify_password
+
     else
       flash[:error]="两次密码输入不一致"
       redirect_to :modify_password
     end
-    # if user.save
-    #   redirect_to :manager_index
-    # else
-    #   redirect_to :modify_password
-    # end
+
   end
+
   def modify_password
-   # @user = User.get_activity(params[:name])
-if session[:name] == ""
-    session[:name]= params[:name]
+    # @user = User.get_activity(params[:name])
+    if session[:name] == ""
+      session[:name]= params[:name]
 
-end
+    end
 
   end
+
   def delete_user
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
+
   # def get_activity(name)
   #   User.find_by_name(name)
   # end
@@ -81,6 +84,7 @@ end
       redirect_to :login
     end
   end
+
   def create
     @user=User.new(params[:user])
     if @user.save
