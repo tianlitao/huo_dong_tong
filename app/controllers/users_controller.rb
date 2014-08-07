@@ -1,8 +1,14 @@
 #encoding:utf-8
 class UsersController < ApplicationController
 
-
-
+def forget_one
+end
+def next_one
+  session[:name]=params[:name]
+  if session[:name]
+    redirect_to :forget_two
+  end
+end
 
 
 

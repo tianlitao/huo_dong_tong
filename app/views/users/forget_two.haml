@@ -1,0 +1,19 @@
+#login.boxed-group
+  .panel.panel-default{:style => "width: 500px;margin-left: 450px;;margin-top: 90px"}
+    .panel-body
+      %h3 重置密码
+      %p= link_to "用户登录", login_path, :style => "padding-left: 400px"
+      = form_tag "/create_login_session" do
+        .input-group
+          %span.input-group-addon 忘记密码问题
+          = text_field_tag :question, params[:question], :class => 'form-control'
+        %p
+        .input-group
+          %span.input-group-addon 忘记密码答案
+          = text_field :answer, params[:answer], :class => 'form-control', :placeholder => "请输入答案"
+        %p
+          - if flash[:error]
+            .alert.alert-danger
+              =flash[:error]
+        %p
+          = submit_tag "下一步", :style => "margin-left: 165px;width: 116px"
