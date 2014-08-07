@@ -34,10 +34,12 @@ class UsersController < ApplicationController
     user.password_confirmation = params[:user][:password_confirmation]
     if user.password==user.password_confirmation
       user.save
+   #   flash[:succeed] = '成功'
       redirect_to :manager_index
     else
-      @u=true
-     # redirect_to :modify_password
+      flash[:error]="两次密码输入不一致"
+
+      redirect_to :modify_password/params[:name]
     end
     # if user.save
     #   redirect_to :manager_index
