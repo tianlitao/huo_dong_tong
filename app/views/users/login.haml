@@ -12,7 +12,7 @@
           %span.input-group-addon 密码
           = password_field_tag :password, params[:password], :class => 'form-control', :placeholder => "请输入密码"
         %p
-        %p= link_to "忘记密码", login_path,:style => "padding-left: 400px"
+        %p= link_to "忘记密码", forget_one_path,:style => "padding-left: 400px"
         %p
           - if flash[:error]
             .alert.alert-danger

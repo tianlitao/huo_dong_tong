@@ -1,6 +1,11 @@
 #encoding:utf-8
 class UsersController < ApplicationController
-  User.all[0]={:id => 0, :name => "admin", :password_digest => "admin"}
+
+
+
+
+
+
 
   def add_user
     @user=User.new

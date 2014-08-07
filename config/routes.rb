@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'users/backstage'
-
   root to: "users#login"
   get "/modify_password" => "users#modify_password", :as => "modify_password"
   get "/signup" => "users#signup", :as => "signup"
@@ -8,6 +7,9 @@ Rails.application.routes.draw do
   get "/welcome" => "users#welcome", :as => "welcome"
   get "/add_user" => "users#add_user", :as => "add_user"
   get "/manager_index" => "users#manager_index", :as => "manager_index"
+  get "/forget_one" => "users#forget_one", :as => "forget_one"
+  get "forget_two" => "users#forget_two"
+  get "forget_three" =>"users#forget_three"
   post "/modify_password" => "users#change_password"
  # post "/change_password" => "users#change_password"
   #post "/add_user" =>"users#add_user"
