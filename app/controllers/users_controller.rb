@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @user=User.new
   end
   def manager_index
+    session[:name].clear
     if  current_user
       @user=User.paginate(page: params[:page], per_page: 10).offset(1)
       if params[:page].to_i==0
@@ -38,8 +39,7 @@ class UsersController < ApplicationController
       redirect_to :manager_index
     else
       flash[:error]="两次密码输入不一致"
-
-      redirect_to :modify_password/params[:name]
+      redirect_to :modify_password
     end
     # if user.save
     #   redirect_to :manager_index
@@ -48,8 +48,11 @@ class UsersController < ApplicationController
     # end
   end
   def modify_password
+   # @user = User.get_activity(params[:name])
+if session[:name] == ""
     session[:name]= params[:name]
-    @user = User.get_activity(params[:name])
+
+end
 
   end
   def delete_user

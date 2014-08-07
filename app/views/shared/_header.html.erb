@@ -5,7 +5,7 @@
     <!--</a>-->
     <ul id="user-links" class="header-right">
       <% if current_user %>
-          <p style="position: absolute;left: 1200px;top: 20px">你好&nbsp;<%= current_user.name %></p>
+          <p style="position: absolute;left: 1200px;top: 20px">你好&nbsp;<%= link_to_unless_current current_user.name,manager_index_path %></p>
 
           <p><%= link_to "退出", logout_path, method: "delete", style: "position: absolute;left: 1300px;top: 20px;" %></p>
       <% end %>
