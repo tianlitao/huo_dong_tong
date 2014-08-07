@@ -1,11 +1,9 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   User.all[0]={:id => 0, :name => "admin", :password_digest => "admin"}
-
   def add_user
     @user=User.new
   end
-
   def manager_index
     if  current_user
       @user=User.paginate(page: params[:page], per_page: 10).offset(1)
@@ -18,10 +16,8 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def welcome
   end
-
   def login
   end
 
@@ -30,26 +26,34 @@ class UsersController < ApplicationController
   end
 
   def change_password
-    @user = User.get_activity(params[:name])
-    if @user.save
+    user = User.get_activity(session[:name])
+
+
+    # @user.password_digest=params[:user][:password_digest]
+    user.password = params[:user][:password]
+    user.password_confirmation = params[:user][:password_confirmation]
+    if user.password==user.password_confirmation
+      user.save
       redirect_to :manager_index
     else
-      redirect_to :add_user
+      @u=true
+     # redirect_to :modify_password
     end
-
-    # @user.password = params[:name]
-    # @user.password_confirmation = params[:user][:password_confirmation]
+    # if user.save
+    #   redirect_to :manager_index
+    # else
+    #   redirect_to :modify_password
+    # end
   end
-
   def modify_password
+    session[:name]= params[:name]
     @user = User.get_activity(params[:name])
-  end
 
+  end
   def delete_user
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
-
   # def get_activity(name)
   #   User.find_by_name(name)
   # end
@@ -72,7 +76,6 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def create
     @user=User.new(params[:user])
     if @user.save
