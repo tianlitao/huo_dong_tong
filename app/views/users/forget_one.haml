@@ -7,7 +7,10 @@
         .input-group
           %span.input-group-addon 帐号
           = text_field_tag :name, params[:name], :class => 'form-control', :placeholder => "请输入帐号"
-
+        %p
+          - if @err
+            .alert.alert-danger
+              =@err
         %p
         %p &nbsp
         %p
