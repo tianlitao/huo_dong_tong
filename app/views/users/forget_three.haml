@@ -2,6 +2,7 @@
   .panel.panel-default{:style => "width: 500px;margin-left: 450px;;margin-top: 90px"}
     .panel-body
       %h3 重置密码
+      =@e
       %p= link_to "用户登录", login_path, :style => "padding-left: 400px"
       = form_for :user do |f|
         %p
@@ -13,4 +14,8 @@
             = f.label :请重复确认密码, :class => "input-group-addon", :style => "padding-left: 16px;padding-right: 16px"
             = f.password_field :password_confirmation, :class => "form-control", :placeholder => "请重复密码"
         %p
-          = submit_tag "下一步", :style => "margin-left: 165px;width: 116px"
+          - if @error
+            .alert.alert-danger
+              =@error
+        %p
+          = submit_tag "确认修改", :style => "margin-left: 165px;width: 116px"

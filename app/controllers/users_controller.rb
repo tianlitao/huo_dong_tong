@@ -21,8 +21,9 @@ class UsersController < ApplicationController
 
   def forget_two
     session[:question]=User.find_by_name(cookies[:name]).question
-
-
+  end
+  def forget_three
+    @user=User.find_by_name(cookies[:name])
   end
 
 def next_two
@@ -38,10 +39,24 @@ def next_two
     end
 
   end
-
 end
 def next_three
+  user = User.find_by_name(cookies[:name])
+  user.password = params[:user][:password]
+  user.password_confirmation = params[:user][:password_confirmation]
+  if user.password==user.password_confirmation
+    cookies.permanent[:token]=user.token
+    user.save
+    redirect_to :welcome
 
+  else
+    if params[:user][:password]=="" || user.password_confirmation==""
+      @error="不能为空"
+      render :forget_three
+    else @error="密码不一致"
+    render :forget_three
+    end
+  end
 end
 
 def add_user
