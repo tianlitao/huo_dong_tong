@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/forget_one" => "users#forget_one", :as => "forget_one"
   get "forget_two" => "users#forget_two"
   get "forget_three" =>"users#forget_three"
+post "forget_three" => "users#next_three"
   post "/modify_password" => "users#change_password"
  # post "/change_password" => "users#change_password"
   #post "/add_user" =>"users#add_user"

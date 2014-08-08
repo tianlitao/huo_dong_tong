@@ -26,17 +26,23 @@ class UsersController < ApplicationController
   end
 
 def next_two
-  @user=params[:answer]
-  @use=User.find_by_name(cookies[:name]).answer
-
-  if  params[:answer]==User.find_by_name(cookies[:name]).answer
-    render :forget_three
+  if  params[:answer] == User.find_by_name(cookies[:name]).answer
+    redirect_to :forget_three
   else
-    render :forget_two
+    if params[:answer] ==""
+      @error="不能为空"
+      render :forget_two
+    else
+      @error="答案不正确"
+      render :forget_two
+    end
+
   end
 
 end
+def next_three
 
+end
 
 def add_user
   @user=User.new
