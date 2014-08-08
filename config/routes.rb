@@ -14,6 +14,7 @@ Rails.application.routes.draw do
  # post "/change_password" => "users#change_password"
   #post "/add_user" =>"users#add_user"
   post "next_one" => "users#next_one"
+  post "next_two" => "users#next_two"
   post "/create_login_session" => "users#create_login_session"
   delete "delete_user" => "users#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"

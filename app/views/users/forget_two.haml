@@ -3,7 +3,7 @@
     .panel-body
       %h3 重置密码
       %p= link_to "用户登录", login_path, :style => "padding-left: 400px"
-      = form_tag "/create_login_session" do
+      = form_tag "/next_two" do
         .input-group
           %span.input-group-addon 忘记密码问题
           = text_field_tag :question, params[:question], :class => 'form-control'

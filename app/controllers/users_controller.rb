@@ -2,12 +2,16 @@
 class UsersController < ApplicationController
 
 def forget_one
+
 end
 def next_one
-  session[:name]=params[:name]
-  if session[:name]
+
+
     redirect_to :forget_two
-  end
+
+end
+def next_two
+  redirect_to :forget_three
 end
 
 
@@ -82,6 +86,7 @@ end
   end
 
   def create_login_session
+
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token]=user.token
@@ -94,6 +99,7 @@ end
       flash[:error]="无效的用户名或密码"
       redirect_to :login
     end
+
   end
 
   def create
