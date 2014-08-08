@@ -25,7 +25,6 @@ class UsersController < ApplicationController
   def forget_three
     @user=User.find_by_name(cookies[:name])
   end
-
 def next_two
   if  params[:answer] == User.find_by_name(cookies[:name]).answer
     redirect_to :forget_three
@@ -41,12 +40,14 @@ def next_two
   end
 end
 def next_three
+if cookies[:name]
   user = User.find_by_name(cookies[:name])
   user.password = params[:user][:password]
   user.password_confirmation = params[:user][:password_confirmation]
   if user.password==user.password_confirmation
     cookies.permanent[:token]=user.token
     user.save
+    cookies.delete(:name)
     redirect_to :welcome
 
   else
@@ -57,8 +58,9 @@ def next_three
     render :forget_three
     end
   end
+  else redirect_to :login
 end
-
+end
 def add_user
   @user=User.new
 end
@@ -79,6 +81,7 @@ def manager_index
 end
 
 def welcome
+
 end
 
 def login
@@ -89,8 +92,8 @@ def signup
 end
 
 def change_password
+
   user = User.get_activity(session[:name])
-  # @user.password_digest=params[:user][:password_digest]
   user.password = params[:user][:password]
   user.password_confirmation = params[:user][:password_confirmation]
   if user.password==user.password_confirmation
@@ -100,7 +103,8 @@ def change_password
 
   else
     flash[:error]="两次密码输入不一致"
-    redirect_to :modify_password
+
+    render :modify_password
   end
 
 end
@@ -108,7 +112,7 @@ end
 def modify_password
   # @user = User.get_activity(params[:name])
   if session[:name] == ""
-    session[:name]= params[:name]
+session[:name]=params[:name]
 
   end
 

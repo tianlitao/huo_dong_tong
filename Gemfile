@@ -38,9 +38,11 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'therubyracer'
 gem 'protected_attributes'
 gem 'haml'
 gem 'yaml_db'
   gem 'rspec-core', '2.14.7'
 gem 'mysql'
 gem 'will_paginate-bootstrap'
+
