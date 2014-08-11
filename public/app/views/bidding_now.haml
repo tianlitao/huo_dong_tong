@@ -1,0 +1,19 @@
+%header 竞价
+  .header-left
+    %a.btn.btn-primary(href='#/activity_list') 返回
+  .header-right
+    %button.btn.btn-primary(ng-click="begain()" ng-disabled="bid_start")开始
+#wrapper.wrapper.scrollable
+  %form
+    %div
+      %ul.list-style-2
+        %li(class="{{bidding.bid_color}}" ng-click="bid(bidding.bid_name)" ng-repeat="bidding in activity track by $index" style="height:40px")
+          {{bidding.bid_name}}
+%footer
+  %ul.footer-nav.footer-nav-2tabs
+    %li
+      %a(href="#/bidding")
+        %i.icon-group 报名
+    %li.active
+      %a(href="#/bidding_now")
+        %i.icon-comment(href="") 竞价

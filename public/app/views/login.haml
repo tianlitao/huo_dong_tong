@@ -1,0 +1,14 @@
+.title
+  .index-login
+.index-action
+  .index-login
+    .input-prepend
+      %span.add-on
+        %i.icon-1x  帐号
+      %input#prependedInput(type="text" placeholder="帐号" ng-model="username")
+    .input-prepend
+      %span.add-on
+        %i.icon-1x 密码
+      %input#prependedInput(type="password" placeholder="密码" ng-model="user" )
+    %a.btn-style.btn-1(ng-click="login()")
+      %i 登录

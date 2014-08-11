@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1251786678">
-    <data-source source="LOCAL" name="Rails action: development" uuid="c5badeeb-afa8-45a8-b295-ec333810b95a">
+  <component name="DataSourceManagerImpl" format="xml" hash="250062737">
+    <data-source source="LOCAL" name="Rails action: development" uuid="062fadf4-efd2-48b1-b222-1dccdb14b6ed">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
       <libraries />
     </data-source>
-    <data-source source="LOCAL" name="Rails action: test" uuid="8fc5dcee-1794-4655-9b55-a19a247b6a0e">
+    <data-source source="LOCAL" name="Rails action: test" uuid="4fd693d3-6f24-4b45-8afd-924e91b5f0ae">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/test.sqlite3</jdbc-url>
       <libraries />
     </data-source>
-    <data-source source="LOCAL" name="SQLite -" uuid="972db7cd-65dd-488d-b338-743d4b9e2f63">
+    <data-source source="LOCAL" name="Rails action: production" uuid="3d3e586f-01bc-43b9-91a0-b48e99e178ae">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="SQLite -" uuid="2f80a95b-1ced-43c8-8a9f-d3759582feda">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="SQLite - [2]" uuid="18905010-7df6-4eaa-b9f1-da64bb8ef7d0">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="Rails action: production" uuid="4b289c8b-825f-4d83-996c-d497c6110e6f">
-      <driver-ref>mysql</driver-ref>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="SQLite - [2]" uuid="7a4734b4-4b6b-4097-a614-0defe1cd1ec4">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>

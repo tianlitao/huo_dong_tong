@@ -1,0 +1,24 @@
+%header 报名人数    {{applys.length}}人
+  .header-left
+    %a.btn-style.btn-4.btn-primary(href="#/activity_list") 返回
+  .header-right( ng-switch="apply_status")
+    %button.btn-primary(ng-switch-when="2" ng-click="begain()" ng-disabled="disabled")开始
+    %button.btn-primary(ng-switch-when="1" ng-click="end()")结束　
+#wrapper.wrapper
+  %ul.list-style-2
+    %li(ng-repeat="apply in applys")
+      %h3
+        %p
+          {{apply.apply_name}}
+          %p.header-right
+            {{apply.apply_phone}}
+%footer
+  %ul.footer-nav.footer-nav-2tabs
+    %li.active
+      %a(href="#/bidding")
+        %i.icon-group 报名
+    %li
+      %a(href="#/bidding_now")
+        %i.icon-comment 竞价
+#sign_up_page_id.ng-scope
+

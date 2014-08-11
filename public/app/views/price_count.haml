@@ -1,0 +1,29 @@
+%header
+  {{name}}  (  {{people}}人 )
+  .header-left
+    %button.btn-style.btn-4(ng-click="back()") 返回
+#wrapper.wrapper
+  %ul.list-style-2
+    %li(ng-repeat="bidding in biddings track by $index")
+      %h2
+        %p
+          ￥ {{bidding.price}}
+        %p.header-right
+          {{bidding.count}}人
+%footer
+  %div(ng-show="success")
+    %pre
+      竞价结果：{{bid_name}}    ￥{{price}}    {{phone}}    竞价成功！
+%footer
+  %div(ng-show="fail")
+    %pre
+      竞价失败！
+%footer
+  %ul.footer-nav.footer-nav-2tabs
+    %li
+      %a(href="#/bid_result")
+        %i.icon-group 竞价结果
+    %li.active
+      %a(href="#/price_count")
+        %i.icon-comment 价格统计
+#id.ng-scope

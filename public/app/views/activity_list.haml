@@ -1,0 +1,9 @@
+%header 活动列表
+  .header-right
+    %a.btn-style.btn-4(href='#/create_activity') 创建活动
+#wrapper.wrapper.scrollable
+  %form
+    %div
+      %ul.list-style-2
+        %li(class="{{activity.activity_status}} || {{activity.bid_status}}" ng-click="bid(activity.name)" ng-repeat="activity in activities" style="height:40px")
+          {{activity.name}}

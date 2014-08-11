@@ -1,0 +1,14 @@
+%header
+  {{name}} ( {{people}}人 )
+  .header-left
+    %button.btn-style.btn-4(ng-click="back()") 返回
+  .header-right
+    %button.btn.btn-primary(ng-click="end()" ng-disabled="bid_start")结束
+#wrapper.wrapper
+  %ul.list-style-2
+    %li(ng-repeat="bidding in biddings track by $index")
+      %h3
+        {{bidding.bid_name}}
+      %p
+        {{bidding.bid_phone}}
+#page_id.ng-scope
