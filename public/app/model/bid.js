@@ -9,18 +9,20 @@ function Bid(bid_name) {
 }
 Bid.activity_current_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return(  _.find(action, function (act) {
+    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    return(  _.find(act, function (act) {
         return act.name == localStorage.current_activity
     }))
 }
 Bid.get_apply_list = function (apply) {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return _.findWhere(action, {name: apply}).apply_list
+    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    return _.findWhere(act, {name: apply}).apply_list
 }
 Bid.check_crruent_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-
-    return _.findWhere(action, {name: localStorage.current_activity}).bid_list
+var act= _.filter(action,function(act){return act.user==localStorage.user})
+    return _.findWhere(act, {name: localStorage.current_activity}).bid_list
 }
 Bid.check_current_activity_bid = function () {
     var act = Bid.check_crruent_activity()
@@ -81,7 +83,8 @@ Bid.check_current_activity_bid_list = function () {
 }
 Bid.check_current_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return(_.find(action, function (bidding) {
+    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    return(_.find(act, function (bidding) {
         return bidding.name == localStorage.current_activity
     }))
 }
@@ -148,7 +151,8 @@ Bid.check_current_activity_save_bid_color = function () {
     Bid.save_bid_status()
     localStorage.status=false
     var bidding = JSON.parse(localStorage.getItem("activities"))
-    var bid = _.findWhere(bidding, {name: localStorage.current_activity}).bid_list
+    var act= _.filter(bidding,function(act){return act.user==localStorage.user})
+    var bid = _.findWhere(act, {name: localStorage.current_activity}).bid_list
     _.findWhere(bid, {bid_name: localStorage.bid}).bid_color = "false"
     localStorage.setItem("activities", JSON.stringify(bidding))
 }

@@ -1,21 +1,19 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
   def user_login
     user = User.get_activity(params[:username])
-    respond_to   do |format|
-         if user && user.authenticate(params[:password])
-          format.json { render :json => 'true' }
-         else
-           format.json { render :json=> 'false' }
-
-         end
+    respond_to do |format|
+      if user && user.authenticate(params[:password])
+        format.json {render :json=>'true'}
+      else
+        format.json {render :json=>'false'}
+      end
     end
   end
-
   def forget_one
   end
-
   def next_one
     cookies[:name]=params[:name]
     if User.find_by_name(params[:name])
@@ -30,7 +28,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def forget_two
     session[:question]=User.find_by_name(cookies[:name]).question
   end
@@ -50,10 +47,8 @@ class UsersController < ApplicationController
         @error="答案不正确"
         render :forget_two
       end
-
     end
   end
-
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])

@@ -67,5 +67,5 @@ angular
         redirectTo: '/'
       });
   });
-var server = "http://192."
+var server = "http://192.168.0.121"
 

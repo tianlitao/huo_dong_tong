@@ -3,13 +3,16 @@
  */
 function Activity (name){
     this.name=name;
+    this.user=localStorage.user;
     this.activity_status='false';
     this.apply_list=[];
     this.bid_status='false';
     this.bid_list=[]
 }
 Activity.check_activity_list_exist=function(){
-return localStorage.getItem('activities')
+    var activities = JSON.parse(localStorage.getItem("activities")) || [];
+   return( _.filter(activities,function(act){return act.user==localStorage.user}))
+
 }
 Activity.prototype.save_message=function(){
     var activities = JSON.parse(localStorage.getItem("activities")) || [];
@@ -25,7 +28,9 @@ Activity.save_click_activity=function(activity){
     localStorage.current_activity = activity
 }
 Activity.get_activities=function(){
-   return JSON.parse(localStorage.getItem('activities'))
+    var activities = JSON.parse(localStorage.getItem('activities'))
+   return( _.filter(activities,function(act){return act.user==localStorage.user}))
+
 }
 Activity.check_rename=function($scope){
     var activities = JSON.parse(localStorage.getItem("activities")) || [];

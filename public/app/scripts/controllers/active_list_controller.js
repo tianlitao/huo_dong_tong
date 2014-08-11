@@ -8,7 +8,8 @@ angular.module('angularApp')
             Activity.save_click_activity(activity)
         }
         $scope.activities = Activity.get_activities()
-        if (!Activity.check_activity_list_exist()) {
+        console.log(Activity.check_activity_list_exist())
+        if (Activity.check_activity_list_exist().length==0) {
             $location.path('create_activity')
         }
     }

@@ -10,5 +10,6 @@
       %span.add-on
         %i.icon-1x 密码
       %input#prependedInput(type="password" placeholder="密码" ng-model="user" )
+    .alert.alert-danger(ng-show="display" style="margin-left: 540px;width: 261px" )  帐号或密码不正确
     %a.btn-style.btn-1(ng-click="login()")
       %i 登录
