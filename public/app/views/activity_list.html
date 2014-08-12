@@ -1,1 +1,15 @@
-<header>活动列表<div class="header-right"><a href="#/create_activity" class="btn-style btn-4">创建活动</a></div></header><div class="wrapper scrollable" id="wrapper"><form><div><ul class="list-style-2"><li class="{{activity.activity_status}} || {{activity.bid_status}}" ng-click="bid(activity.name)" ng-repeat="activity in activities" style="height:40px">{{activity.name}}</li></ul></div></form></div>
+<header>活动列表
+    <div class="header-right"><a href="#/create_activity" class="btn-style btn-4">创建活动</a></div>
+    <div class="header-left"><a  class="btn-style btn-4">同步</a></div>
+</header>
+<div class="wrapper scrollable" id="wrapper">
+    <form>
+        <div>
+            <ul class="list-style-2">
+                <li class="{{activity.activity_status}} || {{activity.bid_status}}" ng-click="bid(activity.name)"
+                    ng-repeat="activity in activities" style="height:40px">{{activity.name}}
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

@@ -2,6 +2,9 @@
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
+  def upload
+    
+  end
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
