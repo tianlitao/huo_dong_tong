@@ -1,6 +1,8 @@
 %header 创建活动
   .header-left
-    %a.btn-style.btn-4(ng-show="show" href="#/") 返回
+    %button.btn-style.btn-4(ng-show="show" ng-click="logout()") 返回
+  .header-right
+    %a.btn-style.btn-4(href="#/activity_list") 进入
 #wrapper.wrapper.scrollable
   %form
 

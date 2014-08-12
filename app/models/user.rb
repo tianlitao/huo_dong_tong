@@ -7,6 +7,7 @@ validates :name, :presence => true,:uniqueness => {:case_sensitive => false}
   has_secure_password
   validates :question, :presence => true
   validates :answer, :presence => true
+
   def self.get_activity(name)
     User.find_by_name(name)
   end

@@ -3,20 +3,49 @@ class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   def upload
-    
+    Apply.delete_all(:user => params[:user])
+    apply=Apply.new
+    apply.user=params[:user]
+    apply.name=params[:activity_name]
+    respond_to do |format|
+      if params[:apply_list]==nil
+        apply.save
+        format.json { render :json => 'true' }
+      else
+        params[:apply_list].each do |p|
+          apply.apply_name=p[:apply_name]
+          apply.apply_phone=p[:apply_phone]
+        end
+        apply.save
+        format.json { render :json => 'true' }
+      end
+      # params[:apply_list].each do |p|
+      #   apply.apply_name=p[:apply_name]
+      #
+      #   apply.apply_phone=p[:apply_phone]
+      #
+      #     if apply.save
+      #       format.json { render :json => 'true' }
+      #     end
+      #   end
+    end
+
   end
+
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
       if user && user.authenticate(params[:password])
-        format.json {render :json=>'true'}
+        format.json { render :json => 'true' }
       else
-        format.json {render :json=>'false'}
+        format.json { render :json => 'false' }
       end
     end
   end
+
   def forget_one
   end
+
   def next_one
     cookies[:name]=params[:name]
     if User.find_by_name(params[:name])
@@ -31,6 +60,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def forget_two
     session[:question]=User.find_by_name(cookies[:name]).question
   end
@@ -52,6 +82,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])

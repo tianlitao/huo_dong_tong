@@ -1,1 +1,16 @@
-<header>创建活动<div class="header-left"><a ng-show="show" href="#/" class="btn-style btn-4">返回</a></div></header><div class="wrapper scrollable" id="wrapper"><form><fieldset class="form-wrapper"></fieldset><h5>活动名称</h5><input ng-model="activity" class="input-full" /><p></p><a href="#/bidding" ng-click="create()" ng-disabled="!activity" style="width:100%" class="btn">创建</a><p></p><div style="color:#ff0000" ng-show="hide" class="logo-flat">活动名重复</div></form></div>
+<header>创建活动
+    <div class="header-left"><button ng-show="show"  ng-click="logout()" class="btn-style btn-4">返回</button></div>
+    <div class="header-right"><a  href="#/activity_list" class="btn-style btn-4">进入</a></div>
+</header>
+<div class="wrapper scrollable" id="wrapper">
+    <form>
+        <fieldset class="form-wrapper"></fieldset>
+        <h5>活动名称</h5><input ng-model="activity" class="input-full"/>
+
+        <p></p><a href="#/bidding" ng-click="create()" ng-disabled="!activity" style="width:100%" class="btn">创建</a>
+
+        <p></p>
+
+        <div style="color:#ff0000" ng-show="hide" class="logo-flat">活动名重复</div>
+    </form>
+</div>
