@@ -16,7 +16,7 @@ Message.check_status=function(json_message){
     var message = json_message.messages[0].message.replace(/\s/g, "");
     var act_list = JSON.parse(localStorage.getItem("activities"));
   var act=  _.filter(act_list,function(act){return act.user==localStorage.user})
-    console.log(message.search(/bm/i) == 0)
+
     return(_.find(act, function (act) {
         return act.activity_status == 'false' && message.search(/bm/i) == 0
     }))
@@ -47,8 +47,9 @@ Message.save_message = function (json_message) {
 }
 Message.check_activity_status = function (json_message) {
     var act_list = JSON.parse(localStorage.getItem("activities"));
+    var act= _.filter(act_list,function(act){return act.user==localStorage.user})
     var message = json_message.messages[0].message.replace(/\s/g, "");
-    return(_.find(act_list, function (act) {
+    return(_.find(act, function (act) {
         return act.activity_status == 'true' && message.search(/bm/i) == 0
     }))
 }
@@ -63,8 +64,9 @@ Message.refresh = function () {
 }
 Message.check_message_jj = function (json_message) {
     var act_list = JSON.parse(localStorage.getItem("activities"));
+    var act= _.filter(act_list,function(act){return act.user==localStorage.user})
     var message = json_message.messages[0].message.replace(/\s/g, "");
-    return( _.find(act_list, function (act) {
+    return( _.find(act, function (act) {
         return act.bid_status == 'true' && message.search(/jj/i) == 0
     }))
 }

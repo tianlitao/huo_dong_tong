@@ -3,6 +3,7 @@
  */
 angular.module('angularApp')
     .controller('BiddingCtrl', function ($scope, $location) {
+
         $scope.diaoyong = function () {
             $scope.applys = Bid.get_apply_list(localStorage.current_activity)
         }

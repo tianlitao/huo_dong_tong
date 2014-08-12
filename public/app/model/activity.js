@@ -11,20 +11,24 @@ function Activity (name){
 }
 Activity.check_activity_list_exist=function(){
     var activities = JSON.parse(localStorage.getItem("activities")) || [];
+
    return( _.filter(activities,function(act){return act.user==localStorage.user}))
 
 }
 Activity.prototype.save_message=function(){
     var activities = JSON.parse(localStorage.getItem("activities")) || [];
+
     activities.unshift(this)
     localStorage.setItem("activities", JSON.stringify(activities))
 }
 Activity.save_current_activity=function(){
     var activities = JSON.parse(localStorage.getItem('activities'))
-    localStorage.current_activity = activities[0].name
+    var act= _.filter(activities,function(act){return act.user==localStorage.user})
+    localStorage.current_activity = act[0].name
 }
 Activity.save_click_activity=function(activity){
     var activities = JSON.parse(localStorage.getItem('activities'))
+
     localStorage.current_activity = activity
 }
 Activity.get_activities=function(){
@@ -34,7 +38,8 @@ Activity.get_activities=function(){
 }
 Activity.check_rename=function($scope){
     var activities = JSON.parse(localStorage.getItem("activities")) || [];
-    return(_.find(activities, function (act) {
+    var act= _.filter(activities,function(act){return act.user==localStorage.user})
+    return(_.find(act, function (act) {
         return act.name == $scope.activity
     }))
 }
@@ -49,6 +54,12 @@ Activity.judge_check_rename=function($scope){
         Activity.save_current_activity()
       //  $location.path('bidding')
     }
+}
+Activity.localstorage_clear=function(){
+    localStorage.bid=""
+    localStorage.bid_price="[]"
+    localStorage.current_activity=""
+    localStorage.status=""
 }
 
 

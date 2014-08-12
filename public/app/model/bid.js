@@ -9,19 +9,25 @@ function Bid(bid_name) {
 }
 Bid.activity_current_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
     return(  _.find(act, function (act) {
         return act.name == localStorage.current_activity
     }))
 }
 Bid.get_apply_list = function (apply) {
     var action = JSON.parse(localStorage.getItem("activities"))
-    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
     return _.findWhere(act, {name: apply}).apply_list
 }
 Bid.check_crruent_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-var act= _.filter(action,function(act){return act.user==localStorage.user})
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
     return _.findWhere(act, {name: localStorage.current_activity}).bid_list
 }
 Bid.check_current_activity_bid = function () {
@@ -37,20 +43,29 @@ Bid.get_current_activity = function (action) {
 }
 Bid.save_activity_status = function (status) {
     var action = JSON.parse(localStorage.getItem("activities"));
-    _.findWhere(action, {name: status}).activity_status = "true"
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    _.findWhere(act, {name: status}).activity_status = "true"
     localStorage.setItem('activities', JSON.stringify(action))
 }
 Bid.save_activity_status_false = function (status) {
     var action = JSON.parse(localStorage.getItem("activities"));
-    _.findWhere(action, {name: status}).activity_status = "false"
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    _.findWhere(act, {name: status}).activity_status = "false"
     localStorage.setItem('activities', JSON.stringify(action))
 }
-Bid.save_bid_status_bid_message=function(){
+Bid.save_bid_status_bid_message = function () {
     var action = JSON.parse(localStorage.getItem("activities"));
-    _.findWhere(action,{name:localStorage.current_activity}).bid_status="true"
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    _.findWhere(act, {name: localStorage.current_activity}).bid_status = "true"
     localStorage.setItem('activities', JSON.stringify(action))
     var bid = JSON.parse(localStorage.getItem("activities"));
-    var bidding=  _.find(bid, function (bid) {
+    var bidding = _.find(bid, function (bid) {
         return bid.name == localStorage.current_activity
     })
     localStorage.bid = "竞价" + (bidding.bid_list.length + 1)
@@ -61,43 +76,63 @@ Bid.save_bid_status_bid_message=function(){
 }
 Bid.check_current_activity_activity_status = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return(  _.find(action, function (act) {
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    return(  _.find(act, function (act) {
         return act.name == localStorage.current_activity && act.activity_status == 'true'
     }))
 }
 Bid.check_bid_status = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return(_.find(action, function (action) {
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    return(_.find(act, function (action) {
         return action.bid_status == 'true'
     }))
 }
 Bid.check_activity_status = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return (_.find(action, function (action) {
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    return (_.find(act, function (action) {
         return action.activity_status == 'true'
     }))
 }
 Bid.check_current_activity_bid_list = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return ( _.findWhere(action, {name: localStorage.current_activity}).bid_list)
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    return ( _.findWhere(act, {name: localStorage.current_activity}).bid_list)
 }
 Bid.check_current_activity = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    var act= _.filter(action,function(act){return act.user==localStorage.user})
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
     return(_.find(act, function (bidding) {
         return bidding.name == localStorage.current_activity
     }))
 }
 Bid.check_activity_status_length = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
     var bidding = Bid.check_current_activity()
-    return(  _.find(action, function (bid) {
+    return(  _.find(act, function (bid) {
         return bid.activity_status == 'true' || bidding.length == 0
     }))
 }
 Bid.check_current_bid = function () {
     var action = JSON.parse(localStorage.getItem("activities"))
-    return(_.find(action, function (action) {
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    return(_.find(act, function (action) {
         return action.bid_list[0].bid_name == localStorage.bid
     }))
 }
@@ -112,7 +147,10 @@ Bid.refresh = function () {
 }
 Bid.save_bid_status = function () {
     var action = JSON.parse(localStorage.getItem("activities"));
-    _.findWhere(action, {name: localStorage.current_activity}).bid_status = "false"
+    var act = _.filter(action, function (act) {
+        return act.user == localStorage.user
+    })
+    _.findWhere(act, {name: localStorage.current_activity}).bid_status = "false"
     localStorage.setItem('activities', JSON.stringify(action))
 
 }
@@ -149,9 +187,14 @@ Bid.display_sortby = function () {
 Bid.check_current_activity_save_bid_color = function () {
     Bid.refresh()
     Bid.save_bid_status()
-    localStorage.status=false
+    localStorage.status = false
     var bidding = JSON.parse(localStorage.getItem("activities"))
-    var act= _.filter(bidding,function(act){return act.user==localStorage.user})
+    var acttion = _.filter(bidding, function (act) {
+        return act.user == localStorage.user
+    })
+    var act = _.filter(acttion, function (act) {
+        return act.user == localStorage.user
+    })
     var bid = _.findWhere(act, {name: localStorage.current_activity}).bid_list
     _.findWhere(bid, {bid_name: localStorage.bid}).bid_color = "false"
     localStorage.setItem("activities", JSON.stringify(bidding))
@@ -182,14 +225,18 @@ Bid.judege_check_current_activity_activity_status = function ($scope) {
     }
 }
 Bid.judge_check_bid_status_activity_status = function ($scope) {
+
     if (Bid.check_bid_status()) {
         $scope.disabled = true
+        return
     }
     if (Bid.check_bid_status() && Bid.check_activity_status()) {
         $scope.disabled = true
+        return
     }
     if (Bid.check_bid_status() && !Bid.check_activity_status()) {
         $scope.disabled = false
+        return
     }
 }
 Bid.judge_check_bid_status = function ($scope) {
@@ -215,7 +262,7 @@ Bid.judge_check_bid_price_bid_count_current_activity_bid_messages_bid_price = fu
         $scope.fail = "true"
     }
 }
-Bid.timeout=function($timeout){
+Bid.timeout = function ($timeout) {
     $('#ModalSuccess').modal("show");
     $timeout(function () {
         $('#ModalSuccess').modal('hide');
