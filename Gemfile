@@ -46,3 +46,5 @@ gem 'yaml_db'
 gem 'mysql'
 gem 'will_paginate-bootstrap'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'

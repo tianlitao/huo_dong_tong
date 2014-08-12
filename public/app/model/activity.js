@@ -61,7 +61,17 @@ Activity.localstorage_clear=function(){
     localStorage.current_activity=""
     localStorage.status=""
 }
+Activity.post_message=function(){
+    var action=Activity.check_activity_list_exist()
+    var post=[]
+    for(var i in action) {
 
+
+        var act = {"user": localStorage.user, "name": action[i].name, "number": action[i].apply_list.length, "bid": action[i].bid_list.length}
+    post.push(act)
+    }
+    return post
+}
 
 
 

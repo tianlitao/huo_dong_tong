@@ -3,31 +3,19 @@ class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   def upload
-    Apply.delete_all(:user => params[:user])
-    apply=Apply.new
-    apply.user=params[:user]
-    apply.name=params[:activity_name]
-    respond_to do |format|
-      if params[:apply_list]==nil
-        apply.save
-        format.json { render :json => 'true' }
-      else
-        params[:apply_list].each do |p|
-          apply.apply_name=p[:apply_name]
-          apply.apply_phone=p[:apply_phone]
+    # Apply.delete_all(:user => params[:user])
+    Post.delete_all(:user => params[:user])
+    params[:post].each do |activity|
+      new_activity = Post.new(activity)
+      respond_to do |format|
+        if  new_activity.save
+
+        #   format.json { render :json => 'true' }
+        #
+        # else
+        #   format.json { render :json => 'false' }
         end
-        apply.save
-        format.json { render :json => 'true' }
       end
-      # params[:apply_list].each do |p|
-      #   apply.apply_name=p[:apply_name]
-      #
-      #   apply.apply_phone=p[:apply_phone]
-      #
-      #     if apply.save
-      #       format.json { render :json => 'true' }
-      #     end
-      #   end
     end
 
   end
