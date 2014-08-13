@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def upload
     # Apply.delete_all(:user => params[:user])
-    Post.post_message(params[:user],params[:post])
-    Activity.post_activity(params[:user],params[:activity])
+    Post.post_message(params[:user], params[:post])
+    Activity.post_activity(params[:user], params[:activity])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
@@ -106,17 +106,31 @@ class UsersController < ApplicationController
     end
   end
 
-  def welcome
-if current_user
-  post=Post.all
-  @post=post.paginate(page:params[:page], per_page:10)
-  if params[:page].to_i==0
-    @us=1
-  else
-    @us=params[:page].to_i
+  def apply
+    if current_user
+      activity=Activity.all
+      @activity=activity.paginate(page: params[:page], per_page: 10)
+      if params[:page].to_i==0
+        @us=1
+      else
+        @us=params[:page].to_i
+      end
+
+
+    end
   end
 
-end
+  def welcome
+    if current_user
+      post=Post.all
+      @post=post.paginate(page: params[:page], per_page: 10)
+      if params[:page].to_i==0
+        @us=1
+      else
+        @us=params[:page].to_i
+      end
+
+    end
   end
 
   def login

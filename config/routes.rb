@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "/forget_one" => "users#forget_one", :as => "forget_one"
   get "forget_two" => "users#forget_two"
   get "forget_three" =>"users#forget_three"
+  get "bid" =>"users#bid"
 post "forget_three" => "users#next_three"
   post "/modify_password" => "users#change_password"
  # post "/change_password" => "users#change_password"
@@ -21,6 +22,7 @@ post "forget_three" => "users#next_three"
   post "/create_login_session" => "users#create_login_session"
   delete "delete_user" => "users#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"
+  get "apply" => "users#apply"
   resources :users, only: [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
