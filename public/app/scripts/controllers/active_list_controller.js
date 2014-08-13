@@ -9,7 +9,7 @@ angular.module('angularApp')
         }
         console.log(Activity.activity_message())
         $scope.upload = function () {
-            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(),"activity":Activity.activity_message()}).success(function (back) {
+            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(),"activity":Activity.activity_message(),"bid":Activity.post_bid()}).success(function (back) {
                console.log(111111111)
                 if (back == 'true') {
                     alert("成功")

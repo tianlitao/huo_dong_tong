@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     # Apply.delete_all(:user => params[:user])
     Post.post_message(params[:user], params[:post])
     Activity.post_activity(params[:user], params[:activity])
+    Bid.post_activity(params[:user],params[:bid])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
@@ -105,7 +106,18 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
+def bid
+  if current_user
+    bidding=Bid.where(:user => current_user.name)
+    bid=bidding.where(:name=>params[:name])
+    @bid=bid.paginate(page:params[:page],per_page: 10)
+    if params[:page].to_i==0
+      @us=1
+    else
+      @us=params[:page].to_i
+    end
+  end
+end
   def apply
     if current_user
       activity=Activity.where(:user=>current_user.name)
@@ -116,8 +128,6 @@ class UsersController < ApplicationController
       else
         @us=params[:page].to_i
       end
-
-
     end
   end
 
