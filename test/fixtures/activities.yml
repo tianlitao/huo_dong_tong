@@ -3,9 +3,11 @@
 one:
   user: MyString
   name: MyString
-  status: MyString
+  apply_name: MyString
+  apply_phone: MyString
 
 two:
   user: MyString
   name: MyString
-  status: MyString
+  apply_name: MyString
+  apply_phone: MyString

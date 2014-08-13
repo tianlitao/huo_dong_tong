@@ -7,9 +7,9 @@ angular.module('angularApp')
             $location.path('bidding')
             Activity.save_click_activity(activity)
         }
-        console.log(Activity.post_message())
+        console.log(Activity.activity_message())
         $scope.upload = function () {
-            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message()}).success(function (back) {
+            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(),"activity":Activity.activity_message()}).success(function (back) {
                console.log(111111111)
                 if (back == 'true') {
                     alert("成功")

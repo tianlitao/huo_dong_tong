@@ -4,20 +4,11 @@ class UsersController < ApplicationController
 
   def upload
     # Apply.delete_all(:user => params[:user])
-    Post.delete_all(:user => params[:user])
-    params[:post].each do |activity|
-      new_activity = Post.new(activity)
-      respond_to do |format|
-        if  new_activity.save
-
-        #   format.json { render :json => 'true' }
-        #
-        # else
-        #   format.json { render :json => 'false' }
-        end
-      end
+    Post.post_message(params[:user],params[:post])
+    Activity.post_activity(params[:user],params[:activity])
+    respond_to do |format|
+      format.json { render :json => 'true' and return }
     end
-
   end
 
   def user_login

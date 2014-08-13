@@ -65,13 +65,20 @@ Activity.post_message=function(){
     var action=Activity.check_activity_list_exist()
     var post=[]
     for(var i in action) {
-
-
-        var act = {"user": localStorage.user, "name": action[i].name, "number": action[i].apply_list.length, "bid": action[i].bid_list.length}
-    post.push(act)
+    var act = {"user": localStorage.user, "name": action[i].name, "number": action[i].apply_list.length, "bid": action[i].bid_list.length}
+    post.unshift(act)
     }
     return post
 }
-
+Activity.activity_message=function(){
+    var action=Activity.check_activity_list_exist()
+    var activity=[]
+for(var i in action) {
+ for (var j in action[i].apply_list){
+    var act = {"user": localStorage.user, "name": action[i].name, "apply_name": action[i].apply_list[j].apply_name, "apply_phone": action[i].apply_list[j].apply_phone}
+    activity.push(act)
+ }}
+    return activity
+}
 
 
