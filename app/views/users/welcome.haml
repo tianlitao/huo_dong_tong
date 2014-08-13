@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-heading
+    活动信息&nbsp&nbsp&nbsp
+  %table.table
+    %tr
+      %td(align="center")  编号
+      %td(align="center")  活动名称
+      %td(align="center")   报名人数
+      %td(align="center")   竞价次数
+    -  id=(@us-1)*10
+    - @post.each do |p|
+      %tr
+        %td(align="center")= id=id+1
+        %td(align="center")= p.name
+        %td(align="center")= p.number
+        %td(align="center")= p.bid
+
+
+.pagination(style="margin-left: 1050px;margin-top: 10px" )
+  = will_paginate @post, :previous_label=> '<<', :next_label=> '>>'

@@ -107,7 +107,16 @@ class UsersController < ApplicationController
   end
 
   def welcome
+if current_user
+  post=Post.all
+  @post=post.paginate(page:params[:page], per_page:10)
+  if params[:page].to_i==0
+    @us=1
+  else
+    @us=params[:page].to_i
+  end
 
+end
   end
 
   def login
