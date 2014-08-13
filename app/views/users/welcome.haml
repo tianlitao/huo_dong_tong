@@ -12,7 +12,7 @@
       %tr
         %td(align="center")= id=id+1
         %td(align="center")= p.name
-        %td(align="center")= link_to p.number,apply_path
+        %td(align="center")= link_to p.number,apply_path(:name=>p[:name])
         %td(align="center")= p.bid
 
 

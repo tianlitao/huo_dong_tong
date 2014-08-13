@@ -108,8 +108,9 @@ class UsersController < ApplicationController
 
   def apply
     if current_user
-      activity=Activity.all
-      @activity=activity.paginate(page: params[:page], per_page: 10)
+      activity=Activity.where(:user=>current_user.name)
+      act=activity.where(:name=>params[:name])
+      @activity=act.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
       else
@@ -122,7 +123,7 @@ class UsersController < ApplicationController
 
   def welcome
     if current_user
-      post=Post.all
+      post=Post.where(:user=>current_user.name)
       @post=post.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
