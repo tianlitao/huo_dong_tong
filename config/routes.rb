@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "forget_two" => "users#forget_two"
   get "forget_three" =>"users#forget_three"
   get "bid" =>"users#bid"
+  get "bid_message" => "users#bid_message"
 post "forget_three" => "users#next_three"
   post "/modify_password" => "users#change_password"
  # post "/change_password" => "users#change_password"

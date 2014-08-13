@@ -100,3 +100,24 @@ Activity.post_bid = function () {
     }
     return bid
 }
+Activity.post_bid_list = function () {
+    var action = Activity.check_activity_list_exist()
+    var bid_list = []
+    for (var i in action) {
+        for (var j in action[i].bid_list) {
+            for (var z in action[i].bid_list[j].bid_message) {
+                var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "apply_name": action[i].bid_list[j].bid_message[z].bid_name, "bid_phone": action[i].bid_list[j].bid_message[z].bid_phone, "bid_price": action[i].bid_list[j].bid_message[z].bid_price}
+                bid_list.push(bid)
+            }
+        }
+    }
+    return bid_list
+}
+Activity.price_coutn=function(){
+    var action = Activity.check_activity_list_exist()
+    var price_count=[]
+    for(var i in action){
+        for (var j in action[i].bid_list)
+        var bidding={"user":localStorage.user,"name":action[i]}
+    }
+}

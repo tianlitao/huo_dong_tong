@@ -6,12 +6,12 @@ class UsersController < ApplicationController
     # Apply.delete_all(:user => params[:user])
     Post.post_message(params[:user], params[:post])
     Activity.post_activity(params[:user], params[:activity])
-    Bid.post_activity(params[:user],params[:bid])
+    Bid.post_activity(params[:user], params[:bid])
+    Bidlist.post_bid_message(params[:user],params[:bid_list])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
   end
-
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
@@ -106,22 +106,31 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-def bid
-  if current_user
-    bidding=Bid.where(:user => current_user.name)
-    bid=bidding.where(:name=>params[:name])
-    @bid=bid.paginate(page:params[:page],per_page: 10)
-    if params[:page].to_i==0
-      @us=1
-    else
-      @us=params[:page].to_i
+
+  def bid
+    if params[:name]!=nil
+
+      cookies[:name]=params[:name]
+    end
+    if current_user
+      bidding=Bid.where(:user => current_user.name)
+      bid=bidding.where(:name => cookies[:name])
+      @bid=bid.paginate(page: params[:page], per_page: 10)
+      if params[:page].to_i==0
+        @us=1
+      else
+        @us=params[:page].to_i
+      end
     end
   end
-end
+
   def apply
+    if params[:name]!=nil
+      cookies[:name]=params[:name]
+    end
     if current_user
-      activity=Activity.where(:user=>current_user.name)
-      act=activity.where(:name=>params[:name])
+      activity=Activity.where(:user => current_user.name)
+      act=activity.where(:name => cookies[:name])
       @activity=act.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -133,7 +142,7 @@ end
 
   def welcome
     if current_user
-      post=Post.where(:user=>current_user.name)
+      post=Post.where(:user => current_user.name)
       @post=post.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1

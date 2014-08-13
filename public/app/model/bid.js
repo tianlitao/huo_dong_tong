@@ -189,10 +189,7 @@ Bid.check_current_activity_save_bid_color = function () {
     Bid.save_bid_status()
     localStorage.status = false
     var bidding = JSON.parse(localStorage.getItem("activities"))
-    var acttion = _.filter(bidding, function (act) {
-        return act.user == localStorage.user
-    })
-    var act = _.filter(acttion, function (act) {
+    var act = _.filter(bidding, function (act) {
         return act.user == localStorage.user
     })
     var bid = _.findWhere(act, {name: localStorage.current_activity}).bid_list
