@@ -16,7 +16,7 @@
     - @bid.each do |p|
       %tr
         %td(align="center")= id=id+1
-        %td(align="center")= link_to p.bid_name,bid_message_path
+        %td(align="center")= link_to p.bid_name,bid_message_path(:bid_name=>p.bid_name)
         %td(align="center")=p.bid_num + '/'+ p.apply_num
 
 

@@ -1,0 +1,27 @@
+%ol.breadcrumb
+  %li
+    = link_to_unless_current "首页",welcome_path
+  %li
+    = link_to "竞价列表",bid_path
+  %li
+    = "第一次竞价"
+.panel.panel-default
+  .panel-heading
+    报名列表&nbsp&nbsp&nbsp
+    -#= link_to "竞价列表",bid_path,:class => "btn ", :style => "border-left-width: 1150px"
+  %table.table
+    %tr
+      %td(align="center")  编号
+      %td(align="center")  姓名
+      %td(align="center")  价格/元
+      %td(align="center") 手机号
+    -  id=(@us-1)*10
+    - @bid.each do |p|
+      %tr
+        %td(align="center")= id=id+1
+        %td(align="center")= p.apply_name
+        %td(align="center")=p.bid_price
+        %td(align="center")=p.bid_phone
+
+.pagination(style="margin-left: 1050px;margin-top: 10px" )
+  = will_paginate @bid, :previous_label=> '<<', :next_label=> '>>'

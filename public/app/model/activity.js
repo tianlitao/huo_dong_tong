@@ -113,11 +113,24 @@ Activity.post_bid_list = function () {
     }
     return bid_list
 }
-Activity.price_coutn=function(){
+Activity.price_count = function () {
     var action = Activity.check_activity_list_exist()
-    var price_count=[]
-    for(var i in action){
-        for (var j in action[i].bid_list)
-        var bidding={"user":localStorage.user,"name":action[i]}
-    }
+    var price_count = []
+    for (var i in action) {
+        for (var j in action[i].bid_list) {
+
+            var bidding = action[i].bid_list[j].bid_message
+            var count = _.countBy(bidding, function (bidding) {
+                return bidding.bid_price
+            })
+            var coun = _.map(count, function (value, key) {
+                return {"price": key, "count": value}
+            })
+         for(var z in coun){
+           if(coun!=[]){
+           var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "price": coun[z].price, "count": coun[z].count}
+            price_count.push(bid)
+        }}
+    }}
+    return price_count
 }

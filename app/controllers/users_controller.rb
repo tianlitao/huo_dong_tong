@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     Activity.post_activity(params[:user], params[:activity])
     Bid.post_activity(params[:user], params[:bid])
     Bidlist.post_bid_message(params[:user],params[:bid_list])
+    Count.post_price_count(params[:user],params[:price_count])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
@@ -106,7 +107,26 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
+def bid_message
+  if params[:bid_name]!=nil
+    cookies[:bid_name]=params[:bid_name]
+  end
+  if current_user
+    p '11111111111111111'
+    p current_user.name
+    p cookies[:name]
+    p cookies[:bid_name]
+    bidding=Bidlist.where(:user => current_user.name)
+    bids=bidding.where(:name => cookies[:name])
+    bid=bids.where(:bid_name => cookies[:bid_name])
+    @bid=bid.paginate(page:params[:page],per_page:10)
+    if params[:page].to_i==0
+      @us=1
+    else
+      @us=params[:page].to_i
+    end
+  end
+end
   def bid
     if params[:name]!=nil
 
