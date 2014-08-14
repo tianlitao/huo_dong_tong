@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="233560642">
+  <component name="DataSourceManagerImpl" format="xml" hash="2511147183">
     <data-source source="LOCAL" name="Rails action: development" uuid="062fadf4-efd2-48b1-b222-1dccdb14b6ed">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
@@ -19,14 +19,7 @@
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
       <libraries />
     </data-source>
-    <data-source source="LOCAL" name="SQLite -" uuid="2f80a95b-1ced-43c8-8a9f-d3759582feda">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/production.sqlite3</jdbc-url>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="SQLite - [2]" uuid="bc83b4fa-3e37-47f1-9d7a-9094be4fcd0d">
+    <data-source source="LOCAL" name="SQLite -" uuid="7db7c341-44c2-4f6e-9f87-af791f593cea">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

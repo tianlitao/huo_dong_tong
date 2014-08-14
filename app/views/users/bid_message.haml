@@ -6,9 +6,10 @@
   %li
     = "第一次竞价"
 .panel.panel-default
-  .panel-heading
-    报名列表&nbsp&nbsp&nbsp
-    -#= link_to "竞价列表",bid_path,:class => "btn ", :style => "border-left-width: 1150px"
+  .panel-heading( style="height: 151px")
+    %h1 8
+  %p
+    = link_to "竞价统计",price_count_path,:class => "btn ", :style => "border-left-width: 1150px"
   %table.table
     %tr
       %td(align="center")  编号

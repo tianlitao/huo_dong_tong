@@ -7,7 +7,7 @@ angular.module('angularApp')
             $location.path('bidding')
             Activity.save_click_activity(activity)
         }
-        console.log(Activity.price_count())
+        console.log(Activity.post_bid_list())
         $scope.upload = function () {
             $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count()}).success(function (back) {
 

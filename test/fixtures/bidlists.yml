@@ -7,6 +7,7 @@ one:
   apply_name: MyString
   bid_phone: MyString
   bid_price: MyString
+  status: MyString
 
 two:
   user: MyString
@@ -15,3 +16,4 @@ two:
   apply_name: MyString
   bid_phone: MyString
   bid_price: MyString
+  status: MyString

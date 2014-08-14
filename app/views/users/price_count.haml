@@ -1,0 +1,33 @@
+%ol.breadcrumb
+  %li
+    = link_to_unless_current "首页",welcome_path
+  %li
+    = link_to "竞价列表",bid_path
+  %li
+    = "第一次竞价"
+.panel.panel-default
+  .panel-heading( style="height: 151px")
+    - if @display=="success"
+      %p
+        ="获胜者:"+@price.apply_name
+      %p
+        ="出价:"+@price.bid_price
+      %p
+        ="手机号:"+@price.bid_phone
+    - if @display=="faild"
+      %p 对不起竞价失败
+    - if @display=="now"
+      %p 竞价正在进行中
+
+  %p
+    = link_to "竞价统计",price_count_path,:class => "btn ", :style => "border-left-width: 1150px"
+  %table.table
+    %tr
+      %td(align="center")  价格/元
+      %td(align="center")  人数
+    - @count.each do |p|
+      %tr
+        %td(align="center")=p.price
+        %td(align="center")=p.count
+.pagination(style="margin-left: 1050px;margin-top: 10px" )
+  = will_paginate @count, :previous_label=> '<<', :next_label=> '>>'
