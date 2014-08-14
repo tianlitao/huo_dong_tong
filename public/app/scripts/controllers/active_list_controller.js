@@ -10,12 +10,10 @@ angular.module('angularApp')
         console.log(Activity.post_bid_list())
         $scope.upload = function () {
             $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count()}).success(function (back) {
-
                 if (back == 'true') {
                     alert("成功")
                 }
             })
-
         }
         $scope.activities = Activity.get_activities()
         console.log(Activity.check_activity_list_exist())

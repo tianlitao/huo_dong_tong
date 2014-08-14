@@ -158,4 +158,84 @@
       <primary-key columns="id"/>
     </table>
   </data-source>
+  <data-source source="LOCAL" name="SQLite - [2]" uuid="40c0d0e7-6b74-4965-b329-a3b4f19254bc">
+    <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
+    <schema name="" catalog=""/>
+    <table name="activities" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="apply_name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="apply_phone" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="bidlists" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="apply_name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_phone" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_price" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="status" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="bids" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_num" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="apply_num" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="counts" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid_name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="price" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="count" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="posts" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="number" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="bid" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="schema_migrations" schema="" catalog="" type="TABLE">
+      <column name="version" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <index name="unique_schema_migrations" unique="true" columns="version"/>
+    </table>
+    <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
+      <column name="name" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="seq" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+    </table>
+    <table name="users" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="password_digest" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="question" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="answer" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="admin" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+    </table>
+  </data-source>
 </component>

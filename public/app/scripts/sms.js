@@ -13,7 +13,8 @@ var native_accessor = {
         }
     },
     process_received_message: function (json_message) {
-        if(Message.check_status(json_message)){
+        console.log(11111111)
+        if(!Message.check_status(json_message) && !Message.check_message_j(json_message)){
             native_accessor.send_sms(json_message.messages[0].phone, "对不起活动尚未开始")
             return;
         }
@@ -27,7 +28,7 @@ var native_accessor = {
             Message.refresh()
             return;
         }
-        if(Message.check_message_j(json_message)){
+        if(!Message.check_message_j(json_message)){
             native_accessor.send_sms(json_message.messages[0].phone, "竞价尚未开始")
             return
         }

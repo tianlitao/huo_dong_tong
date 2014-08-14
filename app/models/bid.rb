@@ -7,4 +7,8 @@ class Bid < ActiveRecord::Base
       bid.save
     end
   end
+  def self.current_bid_name(current_user,cookies)
+    bidding=Bid.where(:user => current_user)
+    bidding.where(:name => cookies)
+  end
 end

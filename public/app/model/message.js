@@ -9,7 +9,7 @@ Message.check_message_j = function (json_message) {
     var act= _.filter(act_list,function(act){return act.user==localStorage.user})
     var message = json_message.messages[0].message.replace(/\s/g, "");
     return( _.find(act, function (act) {
-        return act.bid_status == 'false' && message.search(/jj/i) == 0
+        return act.bid_status == 'true' && message.search(/jj/i) == 0
     }))
 }
 Message.check_status=function(json_message){
@@ -18,7 +18,7 @@ Message.check_status=function(json_message){
   var act=  _.filter(act_list,function(act){return act.user==localStorage.user})
 
     return(_.find(act, function (act) {
-        return act.activity_status == 'false' && message.search(/bm/i) == 0
+        return act.activity_status == 'true' && message.search(/bm/i) == 0
     }))
 }
 Message.check_activity_status_bm = function (json_message) {

@@ -1,7 +1,6 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
-
   def upload
     # Apply.delete_all(:user => params[:user])
     Post.post_message(params[:user], params[:post])
@@ -13,7 +12,6 @@ class UsersController < ApplicationController
       format.json { render :json => 'true' and return }
     end
   end
-
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
@@ -64,7 +62,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])
@@ -75,7 +72,6 @@ class UsersController < ApplicationController
         user.save
         cookies.delete(:name)
         redirect_to :welcome
-
       else
         if params[:user][:password]=="" || user.password_confirmation==""
           @error="不能为空"
@@ -89,11 +85,9 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def add_user
     @user=User.new
   end
-
   def manager_index
     session[:name]=""
     if  current_user
@@ -108,36 +102,23 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def price_count
-
-
     if params[:bid_name]!=nil
       cookies[:bid_name]=params[:bid_name]
     end
     if current_user
-      bidding=Count.where(:user => current_user.name)
-      bids=bidding.where(:name => cookies[:name])
-      bid=bids.where(:bid_name => cookies[:bid_name])
-      bid_first=bid.first
-      @count=bid.paginate(page: params[:page], per_page: 10)
-      prices=Bidlist.where(:user => current_user.name)
-
-      price=prices.where(:name => cookies[:name])
-      count=price.where(:bid_name => cookies[:bid_name])
-
-      p "------11111111111111111111111111"
-      
-      p count.first
-      if count.first==nil
-        @display="faild"
+     bidding=Count.bid_display(current_user.name,cookies[:name],cookies[:bid_name])
+      @count=bidding.paginate(page: params[:page], per_page: 10)
+      count=Bidlist.bid_message_display(current_user.name,cookies[:name],cookies[:bid_name])
+      if count.where(:status => "true")==nil
+        @display="now"
       else
-        if count.first.status=="true"
-          @display="now"
+        if count.first==nil
+          @display="faild"
         else
-          if bid_first.count=="1"
+          if bidding.where(:count=>"1") != nil
             @display="success"
-            @price=count.first
+            @price=count.where(:bid_price=>bidding.where(:count=>"1").first.price).first
           else
             @display="faild"
           end
@@ -145,16 +126,28 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def bid_message
     if params[:bid_name]!=nil
       cookies[:bid_name]=params[:bid_name]
     end
     if current_user
-      bidding=Bidlist.where(:user => current_user.name)
-      bids=bidding.where(:name => cookies[:name])
-      bid=bids.where(:bid_name => cookies[:bid_name])
+      bid=Bidlist.bid_message_display(current_user.name,cookies[:name],cookies[:bid_name])
+      bidding=Count.bid_display(current_user.name,cookies[:name],cookies[:bid_name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
+      if bid.where(:status => "true")==nil
+        @display="now"
+      else
+        if bid.first==nil
+          @display="faild"
+        else
+          if bidding.where(:count=>"1") != nil
+            @display="success"
+            @price=bid.where(:bid_price=>bidding.where(:count=>"1").first.price).first
+          else
+            @display="faild"
+          end
+        end
+      end
       if params[:page].to_i==0
         @us=1
       else
@@ -169,8 +162,9 @@ class UsersController < ApplicationController
       cookies[:name]=params[:name]
     end
     if current_user
-      bidding=Bid.where(:user => current_user.name)
-      bid=bidding.where(:name => cookies[:name])
+      bid=Bid.current_bid_name(current_user.name,cookies[:name])
+      # bidding=Bid.where(:user => current_user.name)
+      # bid=bidding.where(:name => cookies[:name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -195,7 +189,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def welcome
     if current_user
       post=Post.where(:user => current_user.name)
@@ -205,19 +198,14 @@ class UsersController < ApplicationController
       else
         @us=params[:page].to_i
       end
-
     end
   end
-
   def login
   end
-
   def signup
     @user=User.new
   end
-
   def change_password
-
     user = User.get_activity(session[:name])
     user.password = params[:user][:password]
     user.password_confirmation = params[:user][:password_confirmation]
@@ -225,39 +213,25 @@ class UsersController < ApplicationController
       user.save
       @a=1
       render :modify_password
-
     else
       flash[:error]="两次密码输入不一致"
-
       render :modify_password
     end
-
   end
-
   def modify_password
-    # @user = User.get_activity(params[:name])
     if session[:name] == ""
       session[:name]=params[:name]
-
     end
-
   end
-
   def delete_user
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
-
-# def get_activity(name)
-#   User.find_by_name(name)
-# end
   def logout
     cookies.delete(:token)
     redirect_to :login
   end
-
   def create_login_session
-
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
       cookies.permanent[:token]=user.token
@@ -270,9 +244,7 @@ class UsersController < ApplicationController
       flash[:error]="无效的用户名或密码"
       redirect_to :login
     end
-
   end
-
   def create
     @user=User.new(params[:user])
     if @user.save
@@ -294,5 +266,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
 end

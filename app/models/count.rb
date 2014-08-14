@@ -7,4 +7,7 @@ class Count < ActiveRecord::Base
       new_activity.save
     end
   end
+  def self.bid_display(username,name,bid_name)
+    Count.where(:user => username,:name => name,:bid_name => bid_name)
+  end
 end

@@ -7,8 +7,19 @@
     = "第一次竞价"
 .panel.panel-default
   .panel-heading( style="height: 151px")
-    %h1 8
+    - if @display=="success"
+      %h3(style="padding-left: 600px" )
+        ="获胜者:"+@price.apply_name
+      %h3(style="padding-left: 620px" )
+        ="出价:"+@price.bid_price
+      %h3(style="padding-left: 550px" )
+        ="手机号:"+@price.bid_phone
+    - if @display=="faild"
+      %h3(style="padding-left: 600px" ) 对不起竞价失败
+    - if @display=="now"
+      %h3(style="padding-left: 600px" ) 竞价正在进行中
   %p
+    = link_to "出价列表",bid_message_path,:class => "btn ", :style => "border-left-width: 1150px"
     = link_to "竞价统计",price_count_path,:class => "btn ", :style => "border-left-width: 1150px"
   %table.table
     %tr

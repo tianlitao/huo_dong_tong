@@ -7,4 +7,7 @@ class Bidlist < ActiveRecord::Base
       new_activity.save
     end
   end
+  def self.bid_message_display(username,name,bid_name)
+    Bidlist.where(:user => username,:name => name,:bid_name => bid_name)
+  end
 end
