@@ -18,10 +18,14 @@
       %h3(style="padding-left: 600px" ) 对不起竞价失败
     - if @display=="now"
       %h3(style="padding-left: 600px" ) 竞价正在进行中
-
-  %p
-    = link_to "出价列表",bid_message_path,:class => "btn ", :style => "border-left-width: 1150px"
-    = link_to "竞价统计",price_count_path,:class => "btn ", :style => "border-left-width: 1150px"
+  %table.table
+    %thead
+      %ul.nav.nav-tabs.nav-justified
+        %li
+          = link_to "出价列表",bid_message_path
+        %li.active
+          %a
+            竞价统计
   %table.table
     %tr
       %td(align="center")  价格/元

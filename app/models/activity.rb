@@ -7,4 +7,8 @@ class Activity < ActiveRecord::Base
       new_activity.save
     end
   end
+  def self.current_activity_name(current_user,cookies)
+    bidding=Activity.where(:user => current_user)
+    bidding.where(:name => cookies)
+  end
 end

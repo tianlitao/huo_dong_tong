@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814015632) do
+ActiveRecord::Schema.define(version: 20140814092038) do
 
   create_table "activities", force: true do |t|
     t.string   "user"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140814015632) do
     t.string   "count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "toke"
   end
 
   create_table "posts", force: true do |t|
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140814015632) do
     t.string   "bid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token"
   end
 
   create_table "users", force: true do |t|

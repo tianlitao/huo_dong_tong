@@ -11,7 +11,7 @@
     - @user.each do |p|
       %tr
         %td(align="center")= id=id+1
-        %td(align="center")= p.name
+        %td(align="center")=link_to p.name,welcome_path(:name=>p[:name])
         %td(align="center")
           =link_to "删除",delete_user_path(:name=>p[:name]), data: { confirm: '您确定要删除'+p[:name]+'？'}, :method => :delete
           =link_to " 修改密码",modify_password_path(:name=>p[:name])

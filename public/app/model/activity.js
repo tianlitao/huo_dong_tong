@@ -111,10 +111,11 @@ Activity.post_bid_list = function () {
             }
         }
     }
-    var list = _.sortBy(bid_list, function (bidding) {
-        return bidding.bid_price
+
+   return _.sortBy(bid_list, function (bidding) {
+        return bidding.bid_phone
     })
-    return list
+
 }
 Activity.price_count = function () {
     var action = Activity.check_activity_list_exist()

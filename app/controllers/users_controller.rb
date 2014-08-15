@@ -89,6 +89,7 @@ class UsersController < ApplicationController
     @user=User.new
   end
   def manager_index
+cookies[:signup]=""
     session[:name]=""
     if  current_user
       user=User.where(:admin => "f")
@@ -158,13 +159,10 @@ class UsersController < ApplicationController
 
   def bid
     if params[:name]!=nil
-
       cookies[:name]=params[:name]
     end
     if current_user
       bid=Bid.current_bid_name(current_user.name,cookies[:name])
-      # bidding=Bid.where(:user => current_user.name)
-      # bid=bidding.where(:name => cookies[:name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -173,14 +171,12 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def apply
     if params[:name]!=nil
       cookies[:name]=params[:name]
     end
     if current_user
-      activity=Activity.where(:user => current_user.name)
-      act=activity.where(:name => cookies[:name])
+      act=Activity.current_activity_name(current_user.name,cookies[:name])
       @activity=act.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -190,8 +186,20 @@ class UsersController < ApplicationController
     end
   end
   def welcome
+    p "111111111111"
+    p params[:name]
+    p "11111111111111"
+    if params[:name]!=nil
+      cookies[:signup] = params[:name]
+    end
+
     if current_user
-      post=Post.where(:user => current_user.name)
+      if Post.current_name(current.name)==nil
+        post=Post.current_name(current_user.name)
+      else
+        post=Post.current_name(current.name)
+      end
+
       @post=post.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -231,13 +239,20 @@ class UsersController < ApplicationController
     cookies.delete(:token)
     redirect_to :login
   end
+  def logoutuser
+    cookies.delete(:signup)
+    redirect_to :manager_index
+  end
   def create_login_session
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
-      cookies.permanent[:token]=user.token
+
       if user.admin == true
+        cookies.permanent[:token]=user.token
         redirect_to :manager_index
       else
+
+        cookies[:signup]=params[:name]
         redirect_to :welcome
       end
     else

@@ -10,4 +10,5 @@ class CreateCounts < ActiveRecord::Migration
       t.timestamps
     end
   end
+
 end

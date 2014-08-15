@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "forget_three" =>"users#forget_three"
   get "bid" =>"users#bid"
   get "bid_message" => "users#bid_message"
+
 post "forget_three" => "users#next_three"
   post "/modify_password" => "users#change_password"
   get "/price_count" =>"users#price_count"
@@ -24,6 +25,7 @@ post "forget_three" => "users#next_three"
   post "/create_login_session" => "users#create_login_session"
   delete "delete_user" => "users#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"
+  delete "logoutuser" => "users#logoutuser"
   get "apply" => "users#apply"
   resources :users, only: [:create]
 

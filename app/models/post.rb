@@ -7,4 +7,7 @@ class Post < ActiveRecord::Base
            new_activity.save
     end
   end
+  def self.current_name(current)
+    Post.where(:user => current)
+  end
 end
