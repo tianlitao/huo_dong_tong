@@ -94,7 +94,7 @@ Activity.post_bid = function () {
     var bid = []
     for (var i in action) {
         for (var j in action[i].bid_list) {
-            var bidding = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "bid_num": action[i].bid_list[j].bid_message.length, "apply_num": action[i].apply_list.length}
+            var bidding = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "bid_num": action[i].bid_list[j].bid_message.length, "apply_num": action[i].apply_list.length,"status":action[i].bid_list[j].bid_color}
             bid.push(bidding)
         }
     }
@@ -106,7 +106,7 @@ Activity.post_bid_list = function () {
     for (var i in action) {
         for (var j in action[i].bid_list) {
             for (var z in action[i].bid_list[j].bid_message) {
-                var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "apply_name": action[i].bid_list[j].bid_message[z].bid_name, "bid_phone": action[i].bid_list[j].bid_message[z].bid_phone, "bid_price": parseInt(action[i].bid_list[j].bid_message[z].bid_price),"status":action[i].bid_status}
+                var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "apply_name": action[i].bid_list[j].bid_message[z].bid_name, "bid_phone": action[i].bid_list[j].bid_message[z].bid_phone, "bid_price": parseInt(action[i].bid_list[j].bid_message[z].bid_price)}
                 bid_list.push(bid)
             }
         }

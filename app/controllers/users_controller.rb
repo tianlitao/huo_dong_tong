@@ -117,9 +117,8 @@ class UsersController < ApplicationController
       bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
       @count=bidding.paginate(page: params[:page], per_page: 10)
       count=Bidlist.bid_message_display(current.name, cookies[:name], cookies[:bid_name])
-      if count.where(:status => "true")==nil
-        @display="now"
-      else
+      status=Bid.bid_status_display(current.name, cookies[:name], cookies[:bid_name])
+      if status.where(:status => "true")==[]
         if count.first==nil
           @display="faild"
         else
@@ -130,6 +129,9 @@ class UsersController < ApplicationController
             @display="faild"
           end
         end
+
+      else
+        @display="now"
       end
     end
   end
@@ -141,8 +143,12 @@ class UsersController < ApplicationController
     if current
       bid=Bidlist.bid_message_display(current.name, cookies[:name], cookies[:bid_name])
       bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
+     status=Bid.bid_status_display(current.name, cookies[:name], cookies[:bid_name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
-      if bid.where(:status => "true")==nil
+      p "1111111111111"
+      p status.where(:status => "true")
+      p "11111111111112222222222222222"
+      if status.where(:status => "true") !=[]
         @display="now"
       else
         if bid.first==nil
