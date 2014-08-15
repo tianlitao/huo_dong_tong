@@ -7,16 +7,14 @@
     <ul id="user-links" class="header-right">
       <% if current_user %>
           <p style="position: absolute;left: 1200px;top: 20px">你好&nbsp;<%=  current_user.name %></p>
-
-
           <p><%= link_to "退出", logout_path, method: "delete", style: "position: absolute;left: 1300px;top: 20px;" %></p>
       <% end %>
+      <% if current_user.name=="admin" %>
       <% if current %>
-          <p style="position: absolute;left: 500px;top: 20px">你好&nbsp;<%=  current.name %></p>
-
-
-          <p><%= link_to "退出", logoutuser_path, method: "delete", style: "position: absolute;left: 700px;top: 20px;" %></p>
+          <p style="position: absolute;left: 1000px;top: 20px">用户&nbsp;<%=  current.name %></p>
+          <p><%= link_to "退出", logoutuser_path, method: "delete", style: "position: absolute;left: 1100px;top: 20px;" %></p>
       <% end %>
+          <% end %>
     </ul>
 
   </div>

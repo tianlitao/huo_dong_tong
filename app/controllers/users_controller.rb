@@ -1,6 +1,7 @@
 #encoding:utf-8
 class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+
   def upload
     # Apply.delete_all(:user => params[:user])
     Post.post_message(params[:user], params[:post])
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
       format.json { render :json => 'true' and return }
     end
   end
+
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
@@ -62,6 +64,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])
@@ -85,11 +88,13 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+
   def add_user
     @user=User.new
   end
+
   def manager_index
-cookies[:signup]=""
+    cookies[:signup]=""
     session[:name]=""
     if  current_user
       user=User.where(:admin => "f")
@@ -103,23 +108,24 @@ cookies[:signup]=""
       redirect_to :login
     end
   end
+
   def price_count
     if params[:bid_name]!=nil
       cookies[:bid_name]=params[:bid_name]
     end
-    if current_user
-     bidding=Count.bid_display(current_user.name,cookies[:name],cookies[:bid_name])
+    if current
+      bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
       @count=bidding.paginate(page: params[:page], per_page: 10)
-      count=Bidlist.bid_message_display(current_user.name,cookies[:name],cookies[:bid_name])
+      count=Bidlist.bid_message_display(current.name, cookies[:name], cookies[:bid_name])
       if count.where(:status => "true")==nil
         @display="now"
       else
         if count.first==nil
           @display="faild"
         else
-          if bidding.where(:count=>"1") != nil
+          if bidding.where(:count => "1") != nil
             @display="success"
-            @price=count.where(:bid_price=>bidding.where(:count=>"1").first.price).first
+            @price=count.where(:bid_price => bidding.where(:count => "1").first.price).first
           else
             @display="faild"
           end
@@ -127,13 +133,14 @@ cookies[:signup]=""
       end
     end
   end
+
   def bid_message
     if params[:bid_name]!=nil
       cookies[:bid_name]=params[:bid_name]
     end
-    if current_user
-      bid=Bidlist.bid_message_display(current_user.name,cookies[:name],cookies[:bid_name])
-      bidding=Count.bid_display(current_user.name,cookies[:name],cookies[:bid_name])
+    if current
+      bid=Bidlist.bid_message_display(current.name, cookies[:name], cookies[:bid_name])
+      bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
       if bid.where(:status => "true")==nil
         @display="now"
@@ -141,9 +148,9 @@ cookies[:signup]=""
         if bid.first==nil
           @display="faild"
         else
-          if bidding.where(:count=>"1") != nil
+          if bidding.where(:count => "1") != nil
             @display="success"
-            @price=bid.where(:bid_price=>bidding.where(:count=>"1").first.price).first
+            @price=bid.where(:bid_price => bidding.where(:count => "1").first.price).first
           else
             @display="faild"
           end
@@ -161,8 +168,11 @@ cookies[:signup]=""
     if params[:name]!=nil
       cookies[:name]=params[:name]
     end
-    if current_user
-      bid=Bid.current_bid_name(current_user.name,cookies[:name])
+    p "11111111111"
+    p current.name
+    p "111111111111"
+    if current
+      bid=Bid.current_bid_name(current.name, cookies[:name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -171,12 +181,13 @@ cookies[:signup]=""
       end
     end
   end
+
   def apply
     if params[:name]!=nil
       cookies[:name]=params[:name]
     end
-    if current_user
-      act=Activity.current_activity_name(current_user.name,cookies[:name])
+    if current
+      act=Activity.current_activity_name(current.name, cookies[:name])
       @activity=act.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1
@@ -185,14 +196,11 @@ cookies[:signup]=""
       end
     end
   end
+
   def welcome
-    p "111111111111"
-    p params[:name]
-    p "11111111111111"
     if params[:name]!=nil
       cookies[:signup] = params[:name]
     end
-
     if current_user
       if Post.current_name(current.name)==nil
         post=Post.current_name(current_user.name)
@@ -208,11 +216,14 @@ cookies[:signup]=""
       end
     end
   end
+
   def login
   end
+
   def signup
     @user=User.new
   end
+
   def change_password
     user = User.get_activity(session[:name])
     user.password = params[:user][:password]
@@ -226,32 +237,36 @@ cookies[:signup]=""
       render :modify_password
     end
   end
+
   def modify_password
     if session[:name] == ""
       session[:name]=params[:name]
     end
   end
+
   def delete_user
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
+
   def logout
     cookies.delete(:token)
     redirect_to :login
   end
+
   def logoutuser
     cookies.delete(:signup)
     redirect_to :manager_index
   end
+
   def create_login_session
     user =User.find_by_name(params[:name])
     if user && user.authenticate(params[:password])
-
+      cookies.permanent[:token]=user.token
       if user.admin == true
-        cookies.permanent[:token]=user.token
+
         redirect_to :manager_index
       else
-
         cookies[:signup]=params[:name]
         redirect_to :welcome
       end
@@ -260,6 +275,7 @@ cookies[:signup]=""
       redirect_to :login
     end
   end
+
   def create
     @user=User.new(params[:user])
     if @user.save
