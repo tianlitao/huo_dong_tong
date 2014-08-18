@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-heading( style="height: 151px")
+    - if @display
+      %h2(style="padding-left: 620px" )
+        =@display.name
+      %p
+        %h3(style="padding-left: 580px" )
+          ="参与人数："+ @display.bid_num + '/' + @display.apply_num
+    - if @dis
+      %h2(style="padding-left: 620px" )
+        =@dis
+  %table.table
+    %tr
+      %td(align="right")  姓名
+      %td(align="right") 手机号
+    - @bid.each do |p|
+      %tr
+        %td(align="right")= p.bid_name
+        %td(align="right")=p.bid_phone

@@ -94,7 +94,7 @@ Activity.post_bid = function () {
     var bid = []
     for (var i in action) {
         for (var j in action[i].bid_list) {
-            var bidding = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "bid_num": action[i].bid_list[j].bid_message.length, "apply_num": action[i].apply_list.length,"status":action[i].bid_list[j].bid_color}
+            var bidding = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "bid_num": action[i].bid_list[j].bid_message.length, "apply_num": action[i].apply_list.length, "status": action[i].bid_list[j].bid_color}
             bid.push(bidding)
         }
     }
@@ -112,7 +112,7 @@ Activity.post_bid_list = function () {
         }
     }
 
-   return _.sortBy(bid_list, function (bidding) {
+    return _.sortBy(bid_list, function (bidding) {
         return bidding.bid_price
     })
 
@@ -130,11 +130,36 @@ Activity.price_count = function () {
             var coun = _.map(count, function (value, key) {
                 return {"price": key, "count": value}
             })
-         for(var z in coun){
-           if(coun!=[]){
-           var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "price": coun[z].price, "count": coun[z].count}
-            price_count.push(bid)
-        }}
-    }}
+            for (var z in coun) {
+                if (coun != []) {
+                    var bid = {"user": localStorage.user, "name": action[i].name, "bid_name": action[i].bid_list[j].bid_name, "price": coun[z].price, "count": coun[z].count}
+                    price_count.push(bid)
+                }
+            }
+        }
+    }
     return price_count
+}
+Activity.message_display = function () {
+    var display = []
+    Bid.save_bid_price()
+    var count = JSON.parse(localStorage.getItem("bid_price"))
+    var bidding = Bid.check_current_activity_bid()
+    var a = _.filter(count, function (count) {
+        return count.count == "1"
+    })
+    var b= _.sortBy(a,function(a){ return a.price})
+    console.log(count)
+    for (var i in b) {
+        for (var j in bidding) {
+            if (b[i].price == bidding[j].bid_price) {
+                console.log(111111111111)
+                var bid = {"user": localStorage.user, "bid_name": bidding[j].bid_name, "bid_phone": bidding[j].bid_phone}
+                display.push(bid)
+            }
+        }
+    }
+    return display
+
+
 }

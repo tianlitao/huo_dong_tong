@@ -1,13 +1,14 @@
 .panel.panel-default
   .panel-heading
     活动信息&nbsp&nbsp&nbsp
+    = link_to "同步展示",display_path,:class => "btn btn-default", :style => "margin-left: 1150px"
   %table.table
     %tr
       %td(align="center")  编号
       %td(align="center")  活动名称
       %td(align="center")   报名人数
       %td(align="center")   竞价次数
-    -  id=(@us-1)*10
+    - id=(@us-1)*10
     - @post.each do |p|
       %tr
         %td(align="center")= id=id+1

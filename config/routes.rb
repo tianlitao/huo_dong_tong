@@ -12,10 +12,11 @@ Rails.application.routes.draw do
   get "forget_three" =>"users#forget_three"
   get "bid" =>"users#bid"
   get "bid_message" => "users#bid_message"
-
+get "display" => "users#display"
 post "forget_three" => "users#next_three"
   post "/modify_password" => "users#change_password"
   get "/price_count" =>"users#price_count"
+  get "upload" => "users#upload"
  # post "/change_password" => "users#change_password"
   #post "/add_user" =>"users#add_user"
   post "/upload" => "users#upload"

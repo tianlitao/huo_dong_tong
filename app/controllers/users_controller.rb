@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     Bid.post_activity(params[:user], params[:bid])
     Bidlist.post_bid_message(params[:user], params[:bid_list])
     Count.post_price_count(params[:user], params[:price_count])
+    Display.display(params[:user],params[:display])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
@@ -108,6 +109,20 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+  def display
+  display=  Bid.where(:status => "true")
+  if display !=[]
+    @display=display.first
+    @bid=Display.limit(10)
+  else
+    @dis="对不起当前没有竞价开始"
+  # bids=  Bidlist.bid_message_display(display.first.user,display.first.name,display.first.bid_name)
+  #   bidding=Count.bid_display(display.first.user,display.first.name,display.first.bid_name)
+  # message=  bidding.where(:count=>"1")
+  #   bid=bids.where(:bid_price=>message.)
+
+  end
+  end
 
   def price_count
     if params[:bid_name]!=nil
@@ -122,11 +137,12 @@ class UsersController < ApplicationController
         if count.first==nil
           @display="faild"
         else
-          if bidding.where(:count => "1") != nil
+          if bidding.where(:count => "1") == []
+            @display="faild"
+          else
             @display="success"
             @price=count.where(:bid_price => bidding.where(:count => "1").first.price).first
-          else
-            @display="faild"
+
           end
         end
 
@@ -145,20 +161,21 @@ class UsersController < ApplicationController
       bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
      status=Bid.bid_status_display(current.name, cookies[:name], cookies[:bid_name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
-      p "1111111111111"
-      p status.where(:status => "true")
-      p "11111111111112222222222222222"
       if status.where(:status => "true") !=[]
         @display="now"
       else
         if bid.first==nil
           @display="faild"
         else
-          if bidding.where(:count => "1") != nil
+          p "1111111111111"
+          p bidding.where(:count => "1")
+          p "111111111111111111111"
+          if bidding.where(:count => "1") == []
+            @display="faild"
+
+          else
             @display="success"
             @price=bid.where(:bid_price => bidding.where(:count => "1").first.price).first
-          else
-            @display="faild"
           end
         end
       end

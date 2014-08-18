@@ -14,6 +14,7 @@ angular.module('angularApp')
         $scope.create = function () {
             var activities = JSON.parse(localStorage.getItem("activities")) || [];
             Activity.judge_check_rename($scope)
+            $location.path('/bidding')
         }
         $scope.show = Activity.check_activity_list_exist()
     });

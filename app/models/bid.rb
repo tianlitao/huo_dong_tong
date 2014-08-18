@@ -1,6 +1,5 @@
 class Bid < ActiveRecord::Base
   attr_accessible :name, :user, :bid_name, :apply_num, :bid_num, :status
-
   def self.post_activity(user, message)
      Bid.delete_all(:user => user)
     if message != nil
@@ -10,7 +9,6 @@ class Bid < ActiveRecord::Base
       end
     end
   end
-
   def self.current_bid_name(current_user, cookies)
     bidding=Bid.where(:user => current_user)
     bidding.where(:name => cookies)

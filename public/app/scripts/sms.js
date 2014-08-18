@@ -12,8 +12,10 @@ var native_accessor = {
             this.process_received_message(json_message);
         }
     },
+
     process_received_message: function (json_message) {
-        console.log(11111111)
+//        $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()})
+
         if(!Message.check_status(json_message) && !Message.check_message_j(json_message)){
             native_accessor.send_sms(json_message.messages[0].phone, "对不起活动尚未开始")
             return;
@@ -41,6 +43,11 @@ var native_accessor = {
             Message.save_bid_message(json_message)
             native_accessor.send_sms(json_message.messages[0].phone, "恭喜您已竞价成功")
             Message.refresh_bid()
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                data: {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()}
+            });
             return
         }
 
