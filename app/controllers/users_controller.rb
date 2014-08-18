@@ -3,10 +3,7 @@ class UsersController < ApplicationController
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   def upload
-    # Apply.delete_all(:user => params[:user])
-    p "44444444444444"
     Post.post_message(params[:user], params[:post])
-    p "33333333333333"
     Activity.post_activity(params[:user], params[:activity])
     Bid.post_activity(params[:user], params[:bid])
     Bidlist.post_bid_message(params[:user], params[:bid_list])
@@ -62,7 +59,6 @@ class UsersController < ApplicationController
   def forget_three
     @user=User.find_by_name(cookies[:name])
   end
-
   def next_two
     if  params[:answer] == User.find_by_name(cookies[:name]).answer
       redirect_to :forget_three
@@ -76,7 +72,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])
@@ -100,11 +95,9 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def add_user
     @user=User.new
   end
-
   def manager_index
     cookies[:signup]=""
     session[:name]=""
@@ -120,7 +113,6 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
-
   def display
     display= Bid.where(:status => "true")
     status=Display.where(:success_status => "true")
@@ -134,15 +126,8 @@ class UsersController < ApplicationController
         @success=status.first
         Display.delete_all
       else
-        redirect_to :welcome
+        @faild="竞价失败"
       end
-
-
-      # bids=  Bidlist.bid_message_display(display.first.user,display.first.name,display.first.bid_name)
-      #   bidding=Count.bid_display(display.first.user,display.first.name,display.first.bid_name)
-      # message=  bidding.where(:count=>"1")
-      #   bid=bids.where(:bid_price=>message.)
-
     end
   end
 
@@ -241,8 +226,17 @@ class UsersController < ApplicationController
       end
     end
   end
-
+def dis
+  display= Bid.where(:status => "true")
+  if display == []
+    redirect_to :welcome
+  else
+    redirect_to :display
+  end
+end
   def welcome
+
+
     if params[:name]!=nil
       cookies[:signup] = params[:name]
     end
@@ -252,7 +246,6 @@ class UsersController < ApplicationController
       else
         post=Post.current_name(current.name)
       end
-
       @post=post.paginate(page: params[:page], per_page: 10)
       if params[:page].to_i==0
         @us=1

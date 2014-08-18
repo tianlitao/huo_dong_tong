@@ -1,5 +1,10 @@
+
 .panel.panel-default
   .panel-heading( style="height: 200px")
+    - if @faild
+      %h4(style="padding-left: 610px" ) 比赛结果
+      %h5(style="padding-left: 610px" )
+        =@faild
     - if @display
       %h2(style="padding-left: 620px" )
         =@display.name
@@ -21,8 +26,9 @@
       %tr
         %td(align="center")  姓名
         %td(align="center") 手机号
-
       - @bid.each do |p|
         %tr
           %td(align="center")= p.bid_name
           %td(align="center")=p.bid_phone
+:javascript
+  setTimeout("$('#biddin').load('display/#biddin')",3000)

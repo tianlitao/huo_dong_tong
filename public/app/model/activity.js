@@ -165,6 +165,11 @@ Activity.message_display = function () {
 Activity.display_success = function () {
     var a = Bid.check_bid_messages_bid_price()
     var b = []
-    b.push({"user": localStorage.user, "bid_name": a.bid_name, "bid_price": a.bid_price, "bid_phone": a.bid_phone, "success_status": "true"})
+    if(a){
+        b.push({"user": localStorage.user, "bid_name": a.bid_name, "bid_price": a.bid_price, "bid_phone": a.bid_phone, "success_status": "true"})
+
+    }else {
+        b=[]
+    }
     return b
 }
