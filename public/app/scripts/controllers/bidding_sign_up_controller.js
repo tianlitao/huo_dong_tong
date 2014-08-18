@@ -12,6 +12,8 @@ angular.module('angularApp')
         $scope.end = function () {
             if (confirm("确定要结束吗")) {
                 Bid.check_current_activity_save_bid_color()
+                console.log(Activity.display_success())
+                $http.post('/status_post.json', {"user": localStorage.user,"bid": Activity.post_bid(),"post": Activity.post_message(),"display":Activity.display_success()})
                 $location.path('bid_result')
             }
         }

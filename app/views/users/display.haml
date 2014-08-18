@@ -1,5 +1,5 @@
 .panel.panel-default
-  .panel-heading( style="height: 151px")
+  .panel-heading( style="height: 200px")
     - if @display
       %h2(style="padding-left: 620px" )
         =@display.name
@@ -7,13 +7,21 @@
         %h3(style="padding-left: 580px" )
           ="参与人数："+ @display.bid_num + '/' + @display.apply_num
     - if @dis
-      %h2(style="padding-left: 620px" )
+      %h2(style="padding-left: 630px" )
         =@dis
-  %table.table
-    %tr
-      %td(align="center")  姓名
-      %td(align="center") 手机号
-    - if@display
+      %h4(style="padding-left: 610px" ) 比赛结果
+      %h5(style="padding-left: 610px" )
+        ="获胜者："+@success.bid_name
+      %h5(style="padding-left: 620px" )
+        ="出价："+@success.bid_price
+      %h5(style="padding-left: 590px" )
+        ="电话："+@success.bid_phone
+  - if@display
+    %table.table
+      %tr
+        %td(align="center")  姓名
+        %td(align="center") 手机号
+
       - @bid.each do |p|
         %tr
           %td(align="center")= p.bid_name

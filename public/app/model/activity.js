@@ -15,7 +15,6 @@ Activity.check_activity_list_exist = function () {
     return( _.filter(activities, function (act) {
         return act.user == localStorage.user
     }))
-
 }
 Activity.prototype.save_message = function () {
     var activities = JSON.parse(localStorage.getItem("activities")) || [];
@@ -148,7 +147,9 @@ Activity.message_display = function () {
     var a = _.filter(count, function (count) {
         return count.count == "1"
     })
-    var b= _.sortBy(a,function(a){ return a.price})
+    var b = _.sortBy(a, function (a) {
+        return a.price
+    })
     console.log(count)
     for (var i in b) {
         for (var j in bidding) {
@@ -160,6 +161,10 @@ Activity.message_display = function () {
         }
     }
     return display
-
-
+}
+Activity.display_success = function () {
+    var a = Bid.check_bid_messages_bid_price()
+    var b = []
+    b.push({"user": localStorage.user, "bid_name": a.bid_name, "bid_price": a.bid_price, "bid_phone": a.bid_phone, "success_status": "true"})
+    return b
 }

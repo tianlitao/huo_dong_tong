@@ -11,11 +11,21 @@ class UsersController < ApplicationController
     Bid.post_activity(params[:user], params[:bid])
     Bidlist.post_bid_message(params[:user], params[:bid_list])
     Count.post_price_count(params[:user], params[:price_count])
-    Display.display(params[:user],params[:display])
+    Display.display(params[:user], params[:display])
     respond_to do |format|
       format.json { render :json => 'true' and return }
     end
   end
+
+  def status_post
+    Post.post_message(params[:user], params[:post])
+    Bid.post_activity(params[:user], params[:bid])
+    Display.display(params[:user], params[:display])
+    respond_to do |format|
+      format.json { render :json => 'true' and return }
+    end
+  end
+
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
@@ -110,20 +120,30 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+
   def display
-  display=  Bid.where(:status => "true")
-  if display !=[]
-    @display=display.first
-    @bid=Display.limit(10)
-  else
-  redirect_to :welcome
+    display= Bid.where(:status => "true")
+    status=Display.where(:success_status => "true")
+    if display !=[]
+      @display=display.first
+      @bid=Display.limit(10)
+      cookies[:name]=display.first.name
+    else
+      if status != []
+        @dis=cookies[:name]
+        @success=status.first
+        Display.delete_all
+      else
+        redirect_to :welcome
+      end
 
-  # bids=  Bidlist.bid_message_display(display.first.user,display.first.name,display.first.bid_name)
-  #   bidding=Count.bid_display(display.first.user,display.first.name,display.first.bid_name)
-  # message=  bidding.where(:count=>"1")
-  #   bid=bids.where(:bid_price=>message.)
 
-  end
+      # bids=  Bidlist.bid_message_display(display.first.user,display.first.name,display.first.bid_name)
+      #   bidding=Count.bid_display(display.first.user,display.first.name,display.first.bid_name)
+      # message=  bidding.where(:count=>"1")
+      #   bid=bids.where(:bid_price=>message.)
+
+    end
   end
 
   def price_count
@@ -161,7 +181,7 @@ class UsersController < ApplicationController
     if current
       bid=Bidlist.bid_message_display(current.name, cookies[:name], cookies[:bid_name])
       bidding=Count.bid_display(current.name, cookies[:name], cookies[:bid_name])
-     status=Bid.bid_status_display(current.name, cookies[:name], cookies[:bid_name])
+      status=Bid.bid_status_display(current.name, cookies[:name], cookies[:bid_name])
       @bid=bid.paginate(page: params[:page], per_page: 10)
       if status.where(:status => "true") !=[]
         @display="now"

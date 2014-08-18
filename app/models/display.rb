@@ -1,5 +1,5 @@
 class Display < ActiveRecord::Base
-  attr_accessible  :user, :bid_name, :bid_phone
+  attr_accessible  :user, :bid_name, :bid_phone, :bid_price, :success_status
   def self.display(user,message)
     Display.delete_all(:user => user)
 
