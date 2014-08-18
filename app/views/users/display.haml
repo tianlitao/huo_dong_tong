@@ -11,9 +11,10 @@
         =@dis
   %table.table
     %tr
-      %td(align="right")  姓名
-      %td(align="right") 手机号
-    - @bid.each do |p|
-      %tr
-        %td(align="right")= p.bid_name
-        %td(align="right")=p.bid_phone
+      %td(align="center")  姓名
+      %td(align="center") 手机号
+    - if@display
+      - @bid.each do |p|
+        %tr
+          %td(align="center")= p.bid_name
+          %td(align="center")=p.bid_phone

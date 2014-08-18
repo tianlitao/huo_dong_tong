@@ -84,6 +84,7 @@ Message.refresh_bid=function(){
         var scope = angular.element(refresh_page).scope();
         scope.$apply(function () {
             scope.break();
+            scope.display();
         })
     }
 }

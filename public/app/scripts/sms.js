@@ -42,12 +42,17 @@ var native_accessor = {
         if (Message.check_message_phone(json_message) && Message.check_message_jj(json_message)) {
             Message.save_bid_message(json_message)
             native_accessor.send_sms(json_message.messages[0].phone, "恭喜您已竞价成功")
+//            console.log( Activity.post_bid())
+//            $.ajax({
+//                type: 'POST',
+//                url: '/bid_display.json',
+//
+//                data: {"user": localStorage.user, "post": Activity.post_message(),  "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()}
+//
+//            });
             Message.refresh_bid()
-            $.ajax({
-                url: '/upload',
-                type: 'POST',
-                data: {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()}
-            });
+
+
             return
         }
 

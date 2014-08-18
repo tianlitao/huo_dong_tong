@@ -1,9 +1,10 @@
 angular.module('angularApp')
-    .controller('BiddingSignUpCtrl', function ($scope, $location) {
+    .controller('BiddingSignUpCtrl', function ($scope, $location,$http) {
         $scope.break = function () {
             $scope.biddings = Bid.check_current_activity_bid()
             $scope.people = Bid.check_current_activity_bid().length
             $scope.name = localStorage.bid
+//            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()})
         }
         $scope.break();
         $scope.bid_start = true
@@ -16,5 +17,8 @@ angular.module('angularApp')
         }
         $scope.back = function () {
             $location.path('bidding_now')
+        }
+        $scope.display=function(){
+            $http.post('/upload.json', {"user": localStorage.user,"bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()})
         }
     })

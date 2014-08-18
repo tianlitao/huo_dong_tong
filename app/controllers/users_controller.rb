@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 
   def upload
     # Apply.delete_all(:user => params[:user])
+    p "44444444444444"
     Post.post_message(params[:user], params[:post])
+    p "33333333333333"
     Activity.post_activity(params[:user], params[:activity])
     Bid.post_activity(params[:user], params[:bid])
     Bidlist.post_bid_message(params[:user], params[:bid_list])
@@ -14,7 +16,6 @@ class UsersController < ApplicationController
       format.json { render :json => 'true' and return }
     end
   end
-
   def user_login
     user = User.get_activity(params[:username])
     respond_to do |format|
@@ -115,7 +116,8 @@ class UsersController < ApplicationController
     @display=display.first
     @bid=Display.limit(10)
   else
-    @dis="对不起当前没有竞价开始"
+  redirect_to :welcome
+
   # bids=  Bidlist.bid_message_display(display.first.user,display.first.name,display.first.bid_name)
   #   bidding=Count.bid_display(display.first.user,display.first.name,display.first.bid_name)
   # message=  bidding.where(:count=>"1")
