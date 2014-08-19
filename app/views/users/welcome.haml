@@ -17,3 +17,5 @@
         %td(align="center")= p.bid
 .pagination(style="margin-left: 1050px;margin-top: 10px" )
   = will_paginate @post, :previous_label=> '<<', :next_label=> '>>'
+:javascript
+  setTimeout("location.reload(true)",3000)

@@ -8,7 +8,7 @@ angular.module('angularApp')
             Activity.save_click_activity(activity)
         }
         $scope.upload = function () {
-            $http.post('/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "activity": Activity.activity_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()}).success(function (back) {
+            $http.post(server+'/upload.json', {"user": localStorage.user, "post": Activity.post_message(), "bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()}).success(function (back) {
                 if (back == 'true') {
                     alert("成功")
                 }

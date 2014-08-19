@@ -13,7 +13,7 @@ angular.module('angularApp')
             if (confirm("确定要结束吗")) {
                 Bid.check_current_activity_save_bid_color()
                 console.log(Activity.display_success())
-                $http.post('/status_post.json', {"user": localStorage.user,"bid": Activity.post_bid(),"post": Activity.post_message(),"display":Activity.display_success()})
+                $http.post(server+'/status_post.json', {"user": localStorage.user,"bid": Activity.post_bid(),"post": Activity.post_message(),"display":Activity.display_success()})
                 $location.path('bid_result')
             }
         }
@@ -21,6 +21,6 @@ angular.module('angularApp')
             $location.path('bidding_now')
         }
         $scope.display=function(){
-            $http.post('/upload.json', {"user": localStorage.user,"bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()})
+            $http.post(server+'/upload.json', {"post":Activity.post_message(),"user": localStorage.user,"bid": Activity.post_bid(), "bid_list": Activity.post_bid_list(),"price_count":Activity.price_count(),"display":Activity.message_display()})
         }
     })

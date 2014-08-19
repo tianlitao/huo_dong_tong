@@ -16,7 +16,7 @@ angular.module('angularApp')
         $scope.begain = function () {
             Bid.save_bid_status_bid_message()
             console.log(Activity.post_message())
-            $http.post('/status_post.json', {"user": localStorage.user,"bid": Activity.post_bid(), "post": Activity.post_message()})
+            $http.post(server+'/status_post.json', {"user": localStorage.user,"bid": Activity.post_bid(), "post": Activity.post_message()})
             $location.path('bidding_sign_up')
 
 

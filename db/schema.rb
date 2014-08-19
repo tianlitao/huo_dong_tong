@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140818071724) do
     t.string   "bid_phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "bid_price"
     t.string   "success_status"
   end
 

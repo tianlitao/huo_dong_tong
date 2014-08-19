@@ -59,6 +59,7 @@ class UsersController < ApplicationController
   def forget_three
     @user=User.find_by_name(cookies[:name])
   end
+
   def next_two
     if  params[:answer] == User.find_by_name(cookies[:name]).answer
       redirect_to :forget_three
@@ -72,6 +73,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   def next_three
     if cookies[:name]
       user = User.find_by_name(cookies[:name])
@@ -95,9 +97,11 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+
   def add_user
     @user=User.new
   end
+
   def manager_index
     cookies[:signup]=""
     session[:name]=""
@@ -113,20 +117,24 @@ class UsersController < ApplicationController
       redirect_to :login
     end
   end
+
   def display
     display= Bid.where(:status => "true")
     status=Display.where(:success_status => "true")
+    sts=Display.where(:bid_name => nil)
     if display !=[]
       @display=display.first
       @bid=Display.limit(10)
       cookies[:name]=display.first.name
     else
       if status != []
-        @dis=cookies[:name]
-        @success=status.first
-        Display.delete_all
-      else
-        @faild="竞价失败"
+        if sts == []
+          @dis=cookies[:name]
+          @success=status.first
+        else
+          @faild="竞价失败"
+        end
+
       end
     end
   end
@@ -226,14 +234,16 @@ class UsersController < ApplicationController
       end
     end
   end
-def dis
-  display= Bid.where(:status => "true")
-  if display == []
-    redirect_to :welcome
-  else
-    redirect_to :display
+
+  def dis
+    display= Bid.where(:status => "true")
+    if display == []
+      redirect_to :welcome
+    else
+      redirect_to :display
+    end
   end
-end
+
   def welcome
 
 

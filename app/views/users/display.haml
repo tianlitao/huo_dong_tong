@@ -1,9 +1,13 @@
-
+%ol.breadcrumb
+  %li
+    = link_to_unless_current "首页",welcome_path
+  %li
+    同步显示
 .panel.panel-default
   .panel-heading( style="height: 200px")
     - if @faild
-      %h4(style="padding-left: 610px" ) 比赛结果
-      %h5(style="padding-left: 610px" )
+      %h2(style="padding-left: 610px" ) 比赛结果
+      %h3(style="padding-left: 620px" )
         =@faild
     - if @display
       %h2(style="padding-left: 620px" )
@@ -12,7 +16,7 @@
         %h3(style="padding-left: 580px" )
           ="参与人数："+ @display.bid_num + '/' + @display.apply_num
     - if @dis
-      %h2(style="padding-left: 630px" )
+      %h2(style="padding-left: 610px" )
         =@dis
       %h4(style="padding-left: 610px" ) 比赛结果
       %h5(style="padding-left: 610px" )
@@ -31,4 +35,4 @@
           %td(align="center")= p.bid_name
           %td(align="center")=p.bid_phone
 :javascript
-  setTimeout("$('#biddin').load('display/#biddin')",3000)
+  setTimeout("location.reload(true)",3000)

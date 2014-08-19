@@ -164,9 +164,14 @@ Bid.check_bid_messages_bid_price = function () {
     var bidding = Bid.check_current_activity()
     var bids = Bid.check_bid_price_bid_count()
     var bid_message = bidding.bid_list[0].bid_message
-    return (_.find(bid_message, function (bid) {
-        return bid.bid_price == bids.price
-    }))
+    if(bids){
+        return (_.find(bid_message, function (bid) {
+            return bid.bid_price == bids.price
+        }))
+    }else{
+        return []
+    }
+
 }
 Bid.save_bid_price = function () {
     var bidding = Bid.check_current_activity_bid()
