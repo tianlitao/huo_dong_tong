@@ -8,4 +8,7 @@ class AdminController < ApplicationController
     User.get_activity(params[:name]).delete
     redirect_to :manager_index
   end
+  def add_users
+    @user=User.new
+  end
 end

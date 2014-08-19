@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'passwords/forgot_passwords'
+
   get 'admin/modify_passwords'
 
   get 'users/backstage'
@@ -9,16 +11,16 @@ Rails.application.routes.draw do
   get "/welcome" => "users#welcome", :as => "welcome"
   get "/add_user" => "users#add_user", :as => "add_user"
   get "/manager_index" => "users#manager_index", :as => "manager_index"
-  get "/forget_one" => "users#forget_one", :as => "forget_one"
-  get "forget_two" => "users#forget_two"
-  get "forget_three" =>"users#forget_three"
+  get "/forget_one" => "passwords#forget_one", :as => "forget_one"
+  get "forget_two" => "passwords#forget_two"
+  get "forget_three" =>"passwords#forget_three"
   get "bid" =>"users#bid"
   get "bid_message" => "users#bid_message"
 get "display" => "users#display"
 get "status_post" =>"users#status_post"
   get "dis" => "users#dis"
   post "status_post" =>"users#status_post"
-post "forget_three" => "users#next_three"
+post "forget_three" => "passwords#next_three"
   post "admin/modify_passwords" => "users#change_password"
   post "/modify_passwords" => "admin#modify_passwords"
   get "/price_count" =>"users#price_count"
@@ -27,8 +29,8 @@ post "forget_three" => "users#next_three"
   #post "/add_user" =>"users#add_user"
   post "/upload" => "users#upload"
   post "/user_login" => "users#user_login"
-  post "next_one" => "users#next_one"
-  post "next_two" => "users#next_two"
+  post "next_one" => "passwords#next_one"
+  post "next_two" => "passwords#next_two"
   post "/create_login_session" => "users#create_login_session"
   delete "delete_user" => "admin#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"
@@ -36,6 +38,7 @@ post "forget_three" => "users#next_three"
   get "apply" => "users#apply"
   resources :users, only: [:create]
   resources :admin
+  resources :passwords
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
