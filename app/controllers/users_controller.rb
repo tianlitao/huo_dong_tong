@@ -33,10 +33,8 @@ class UsersController < ApplicationController
       end
     end
   end
-
   def forget_one
   end
-
   def next_one
     cookies[:name]=params[:name]
     if User.find_by_name(params[:name])
@@ -286,16 +284,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def modify_password
-    if session[:name] == ""
-      session[:name]=params[:name]
-    end
-  end
-
-  def delete_user
-    User.get_activity(params[:name]).delete
-    redirect_to :manager_index
-  end
+  # def modify_password
+  #   if session[:name] == ""
+  #     session[:name]=params[:name]
+  #   end
+  # end
+  #
+  # def delete_user
+  #   User.get_activity(params[:name]).delete
+  #   redirect_to :manager_index
+  # end
 
   def logout
     cookies.delete(:token)

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'admin/modify_passwords'
+
   get 'users/backstage'
   root to: "users#login"
-  get "/modify_password" => "users#modify_password", :as => "modify_password"
+  get "/modify_passwords" => "admin#modify_passwords", :as => "modify_password"
   get "/signup" => "users#signup", :as => "signup"
   get "/login" => "users#login", :as => "login"
   get "/welcome" => "users#welcome", :as => "welcome"
@@ -17,7 +19,8 @@ get "status_post" =>"users#status_post"
   get "dis" => "users#dis"
   post "status_post" =>"users#status_post"
 post "forget_three" => "users#next_three"
-  post "/modify_password" => "users#change_password"
+  post "admin/modify_passwords" => "users#change_password"
+  post "/modify_passwords" => "admin#modify_passwords"
   get "/price_count" =>"users#price_count"
  # get "upload" => "users#upload"
  # post "/change_password" => "users#change_password"
@@ -27,11 +30,12 @@ post "forget_three" => "users#next_three"
   post "next_one" => "users#next_one"
   post "next_two" => "users#next_two"
   post "/create_login_session" => "users#create_login_session"
-  delete "delete_user" => "users#delete_user", :as => "delete_user"
+  delete "delete_user" => "admin#delete_user", :as => "delete_user"
   delete "logout" => "users#logout", :as => "logout"
   delete "logoutuser" => "users#logoutuser"
   get "apply" => "users#apply"
   resources :users, only: [:create]
+  resources :admin
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
